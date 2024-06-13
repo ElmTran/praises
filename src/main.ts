@@ -4,9 +4,13 @@ import App from "./App.vue";
 import "./styles.css";
 import "element-plus/dist/index.css";
 import router from "./router";
+import { initStore } from "./store";
 
 const app = createApp(App);
 
 app.use(router);
 app.use(ElementPlus);
-app.mount("#app");
+
+initStore().then(() => {
+  app.mount("#app");
+});
