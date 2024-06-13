@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Main from "../views/MainView/index.vue";
+import Home from "../views/HomeView/index.vue";
 import Config from "../views/ConfigView/index.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Main",
-    component: Main,
+    name: "Home",
+    component: Home,
   },
   {
     path: "/config",
