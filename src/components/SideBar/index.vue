@@ -1,28 +1,26 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const drawer = ref(false);
-const handleOpen = () => {
-  drawer.value = true;
-};
-const handleClose = () => {
-  drawer.value = false;
-};
+import router from "../../router";
+
+const routes = ref(router.getRoutes());
+const isActived = ref(router.currentRoute.value.path);
 </script>
 <template>
-  <el-aside width="20%">
-    <el-menu
-      default-active="1"
-      class="el-vertical-menu"
-      background-color="#545c64"
-      :collapse="true"
-      @open="handleOpen"
-      @close="handleClose"
-    >
-    </el-menu>
-    <el-drawer :visible.sync="drawer" direction="rtl" class="drawer" size="80%">
-      <p>Form</p>
-    </el-drawer>
-  </el-aside>
+  <el-menu
+    :default-active="isActived"
+    class="el-vertical-menu"
+    :collapse="true"
+    router
+  >
+    <el-menu-item v-for="route in routes" :key="route.path" :index="route.path">
+      <component :is="route.meta.icon" />
+      <template #title>{{ route.meta.title }}</template>
+    </el-menu-item>
+  </el-menu>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.el-aside {
+  display: flex;
+}
+</style>
