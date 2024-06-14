@@ -1,18 +1,26 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Main from "../views/MainView/index.vue";
-import Config from "../views/ConfigView/index.vue";
+import IEpMicrophone from "../assets/icons/iep/microphone.vue";
+import IEpSettings from "../assets/icons/iep/settings.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Main",
-    component: Main,
+    name: "TTS",
+    component: () => import("../views/TTSView/index.vue"),
+    meta: {
+      title: "TTS",
+      icon: IEpMicrophone,
+    },
   },
   {
     path: "/config",
     name: "Config",
-    component: Config,
+    component: () => import("../views/ConfigView/index.vue"),
+    meta: {
+      title: "Config",
+      icon: IEpSettings,
+    },
   },
 ];
 
