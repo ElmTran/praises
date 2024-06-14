@@ -1,43 +1,87 @@
 {
-  "build": {
-    "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build",
-    "devPath": "http://localhost:8080",
-    "distDir": "../dist"
-  },
-  "package": {
-    "productName": "praises",
-    "version": "0.0.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      }
+    "build": {
+        "beforeDevCommand": "pnpm dev",
+        "beforeBuildCommand": "pnpm build",
+        "devPath": "http://localhost:8080",
+        "distDir": "../dist"
     },
-    "windows": [
-      {
-        "title": "praises",
-        "width": 800,
-        "height": 600
-      }
-    ],
-    "security": {
-      "csp": null
+    "package": {
+        "productName": "praises",
+        "version": "0.0.0"
     },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.tauri.dev",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ]
+    "tauri": {
+        "allowlist": {
+            "all": false,
+            "shell": {
+                "all": true,
+                "open": ".*"
+            },
+            "path": {
+                "all": true
+            },
+            "window": {
+                "all": true
+            },
+            "clipboard": {
+                "all": true
+            },
+            "globalShortcut": {
+                "all": true
+            },
+            "notification": {
+                "all": true
+            },
+            "http": {
+                "all": true,
+                "request": true,
+                "scope": [
+                    "http://**",
+                    "https://**"
+                ]
+            },
+            "os": {
+                "all": true
+            },
+            "protocol": {
+                "asset": true,
+                "assetScope": [
+                    "$CACHE/**",
+                    "$CONFIG/**"
+                ]
+            },
+            "fs": {
+                "all": true,
+                "scope": [
+                    "$APPCONFIG/**",
+                    "$APPCACHE/**"
+                ]
+            },
+            "dialog": {
+                "open": true,
+                "save": true
+            }
+        },
+        "windows": [
+            {
+                "title": "praises",
+                "width": 800,
+                "height": 600
+            }
+        ],
+        "security": {
+            "csp": null
+        },
+        "bundle": {
+            "active": true,
+            "targets": "all",
+            "identifier": "com.praises.app",
+            "icon": [
+                "icons/32x32.png",
+                "icons/128x128.png",
+                "icons/128x128@2x.png",
+                "icons/icon.icns",
+                "icons/icon.ico"
+            ]
+        }
     }
-  }
 }
