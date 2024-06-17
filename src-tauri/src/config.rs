@@ -1,10 +1,10 @@
 use crate::APP;
 use dirs::config_dir;
-use log::{info, warn};
-use serde_json::{json, Value};
+use log::{ info, warn };
+use serde_json::{ json, Value };
 use std::sync::Mutex;
-use tauri::{Manager, Wry};
-use tauri_plugin_store::{Store, StoreBuilder};
+use tauri::{ Manager, Wry };
+use tauri_plugin_store::{ Store, StoreBuilder };
 
 pub struct StoreWrapper(pub Mutex<Store<Wry>>);
 
