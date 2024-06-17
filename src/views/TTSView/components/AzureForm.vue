@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import {
   languageOptions,
   voiceOptions,
   styleOptions,
   roleOptions,
 } from "../../../utils/constants";
-import { ref } from "vue";
 
-const condition = ref({
+const condition = reactive({
   language: "",
   voice: "",
   style: "",
