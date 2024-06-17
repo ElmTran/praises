@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
-import EdgeForm from "./components/EdgeForm.vue";
 import WindowsForm from "./components/WindowsForm.vue";
 
 type ServiceType = "azure" | "edge" | "windows";
 
 const text = ref("");
 const service = ref<ServiceType>("azure");
-const services = ref([
+const services = reactive([
   { value: "azure", label: "Azure" },
   { value: "edge", label: "Edge" },
   { value: "windows", label: "Windows" },
+  { value: "chat_tts", label: "ChatTTS" },
 ]);
 
 const forms: Record<ServiceType, typeof AzureForm> = {
   azure: AzureForm,
-  edge: EdgeForm,
+  edge: AzureForm, // AzureForm is used for both Azure and Edge
   windows: WindowsForm,
 };
 </script>
