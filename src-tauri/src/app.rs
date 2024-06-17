@@ -1,23 +1,24 @@
 use crate::cmd::*;
-use crate::services::tts::windows;
+use crate::services::tts::{ azure, windows };
 use crate::config;
 use once_cell::sync::OnceCell;
 use log::info;
 
-pub static APP: OnceCell<tauri::AppHandle> = OnceCell::new();
+pub static HANDLE: OnceCell<tauri::AppHandle> = OnceCell::new(); // define a static variable to store the app handle (singleton)
 
-pub struct PraiseApp {
+pub struct AppBuidler {
     app: tauri::App,
 }
 
-impl PraiseApp {
+impl AppBuidler {
     pub async fn build() -> Result<Self, tauri::Error> {
         let builder = tauri::Builder
             ::default()
             .plugin(tauri_plugin_fs_watch::init())
-            .invoke_handler(tauri::generate_handler![greet, windows::get_devices])
+            .invoke_handler(tauri::generate_handler![greet, windows::get_devices, azure::speak])
             .setup(|app| {
-                APP.get_or_init(|| app.handle());
+                // define a closure to setup the app
+                HANDLE.get_or_init(|| app.handle());
                 info!("Hello from Praises!");
                 config::init_config(app);
                 // Check First Run
