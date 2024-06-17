@@ -1,4 +1,4 @@
-use crate::APP;
+use crate::app::APP;
 use dirs::config_dir;
 use log::{ info, warn };
 use serde_json::{ json, Value };

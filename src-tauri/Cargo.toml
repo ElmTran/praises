@@ -11,7 +11,20 @@ edition = "2021"
 tauri-build = { version = "1", features = [] }
 
 [dependencies]
-tauri = { version = "1", features = [ "global-shortcut-all", "clipboard-all", "protocol-asset", "http-all", "os-all", "notification-all", "dialog-save", "shell-all", "window-all", "dialog-open", "fs-all", "path-all"] }
+tauri = { version = "1", features = [
+    "global-shortcut-all",
+    "clipboard-all",
+    "protocol-asset",
+    "http-all",
+    "os-all",
+    "notification-all",
+    "dialog-save",
+    "shell-all",
+    "window-all",
+    "dialog-open",
+    "fs-all",
+    "path-all",
+] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 dirs = "5.0.1"
@@ -20,6 +33,8 @@ once_cell = "1.18.0"
 tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tokio = { version = "1", features = ["full"] }
+tauri-runtime-wry = "0.14.8"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
