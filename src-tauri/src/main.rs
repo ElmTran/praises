@@ -9,7 +9,7 @@ mod services;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    app::PraiseApp::build().await?.run();
+    app::AppBuidler::build().await?.run();
 
     Ok(())
 }

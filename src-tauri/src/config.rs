@@ -1,4 +1,4 @@
-use crate::app::APP;
+use crate::app::HANDLE;
 use dirs::config_dir;
 use log::{ info, warn };
 use serde_json::{ json, Value };
@@ -26,7 +26,7 @@ pub fn init_config(app: &mut tauri::App) {
 }
 
 pub fn get(key: &str) -> Option<Value> {
-    let state = APP.get().unwrap().state::<StoreWrapper>();
+    let state = HANDLE.get().unwrap().state::<StoreWrapper>();
     let store = state.0.lock().unwrap();
     match store.get(key) {
         Some(value) => Some(value.clone()),
@@ -35,14 +35,14 @@ pub fn get(key: &str) -> Option<Value> {
 }
 
 pub fn set<T: serde::ser::Serialize>(key: &str, value: T) {
-    let state = APP.get().unwrap().state::<StoreWrapper>();
+    let state = HANDLE.get().unwrap().state::<StoreWrapper>();
     let mut store = state.0.lock().unwrap();
     store.insert(key.to_string(), json!(value)).unwrap();
     store.save().unwrap();
 }
 
 pub fn is_first_run() -> bool {
-    let state = APP.get().unwrap().state::<StoreWrapper>();
+    let state = HANDLE.get().unwrap().state::<StoreWrapper>();
     let store = state.0.lock().unwrap();
     store.is_empty()
 }
