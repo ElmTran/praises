@@ -1,36 +1,46 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import AzureForm from "./components/AzureForm.vue";
+import EdgeForm from "./components/EdgeForm.vue";
+import WindowsForm from "./components/WindowsForm.vue";
+
+type ServiceType = "azure" | "edge" | "windows";
+
+const text = ref("");
+const service = ref<ServiceType>("azure");
+const services = ref([
+  { value: "azure", label: "Azure" },
+  { value: "edge", label: "Edge" },
+  { value: "windows", label: "Windows" },
+]);
+
+const forms: Record<ServiceType, typeof AzureForm> = {
+  azure: AzureForm,
+  edge: EdgeForm,
+  windows: WindowsForm,
+};
+</script>
 <template>
   <el-main>
-    <h1>Welcome to Tauri!</h1>
-
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="../../assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
+    <div class="textarea-container">
+      <el-input
+        type="textarea"
+        :rows="10"
+        placeholder="请输入文本"
+        v-model="text"
+      />
     </div>
-
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
-
-    <p>
-      Recommended IDE setup:
-      <a href="https://code.visualstudio.com/" target="_blank">VS Code</a>
-      +
-      <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-      +
-      <a href="https://github.com/tauri-apps/tauri-vscode" target="_blank"
-        >Tauri</a
-      >
-      +
-      <a href="https://github.com/rust-lang/rust-analyzer" target="_blank"
-        >rust-analyzer</a
-      >
-    </p>
+    <div class="options-container">
+      <el-select v-model="service" placeholder="请选择服务">
+        <el-option
+          v-for="item in services"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      <component :is="forms[service]" />
+    </div>
   </el-main>
 </template>
 
