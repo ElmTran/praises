@@ -17,6 +17,7 @@ declare module 'vue' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     Footer: typeof import('./src/components/Footer/index.vue')['default']
+    Greet: typeof import('./src/components/Greet.vue')['default']
     Header: typeof import('./src/components/Header/index.vue')['default']
     IEpMicrophone: typeof import('~icons/ep/microphone')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
