@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
 import WindowsForm from "./components/WindowsForm.vue";
+import FormButton from "./components/FormButton.vue";
 
 type ServiceType = "azure" | "edge" | "windows";
 
@@ -40,6 +41,7 @@ const forms: Record<ServiceType, typeof AzureForm> = {
         />
       </el-select>
       <component :is="forms[service]" />
+      <FormButton />
     </div>
   </el-main>
 </template>
