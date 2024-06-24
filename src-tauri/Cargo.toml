@@ -33,8 +33,10 @@ once_cell = "1.18.0"
 tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
-tokio = { version = "1", features = ["full"] }
 tauri-runtime-wry = "0.14.8"
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12.3", features = ["default", "blocking", "json"] }
+soloud = "1.0.5"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

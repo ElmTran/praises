@@ -1,6 +1,5 @@
-use crate::cmd::*;
-use crate::services::tts::{ azure, windows };
 use crate::config;
+use crate::cmd::*;
 use once_cell::sync::OnceCell;
 use log::info;
 
@@ -15,7 +14,7 @@ impl AppBuidler {
         let builder = tauri::Builder
             ::default()
             .plugin(tauri_plugin_fs_watch::init())
-            .invoke_handler(tauri::generate_handler![greet, windows::get_devices, azure::speak])
+            .invoke_handler(tauri::generate_handler![get_windows_devices, speak])
             .setup(|app| {
                 // define a closure to setup the app
                 HANDLE.get_or_init(|| app.handle());

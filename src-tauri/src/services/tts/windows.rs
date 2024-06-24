@@ -6,7 +6,6 @@ pub struct Device {
     value: String,
 }
 
-#[tauri::command]
 pub fn get_devices() -> Result<Vec<Device>, String> {
     let mut devices = Vec::new();
     devices.push(Device {
