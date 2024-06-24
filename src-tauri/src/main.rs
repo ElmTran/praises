@@ -6,6 +6,7 @@ mod cmd;
 mod config;
 mod error;
 mod services;
+mod libs;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

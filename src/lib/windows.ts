@@ -6,5 +6,5 @@ export interface DeviceOption {
 }
 
 export async function getDevices(): Promise<DeviceOption[]> {
-  return await invoke("get_devices");
+  return await invoke("get_windows_devices");
 }
