@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { Convert } from "../../../lib/azure.ts";
 const ttsTemplate = ref("");
 const ttsTemplates = reactive([
   { value: "template1", label: "模板1" },
@@ -12,6 +13,7 @@ const save = () => {
 
 const convert = () => {
   console.log("convert");
+  Convert();
 };
 </script>
 
