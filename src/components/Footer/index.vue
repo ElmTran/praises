@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { store } from "../../store/index";
 const config = reactive({
   autoplay: false,
 });
 
-const audioSrc = ref("");
+const audioSrc = ref<string>("");
+
+const getAudioSrc = async () => {
+  audioSrc.value = await store.value.get("audioSrc");
+};
+
+getAudioSrc();
 </script>
 <template>
   <el-footer class="footer">
