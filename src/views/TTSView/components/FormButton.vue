@@ -2,11 +2,7 @@
 import { ref, reactive } from "vue";
 import { Convert } from "../../../lib/azure.ts";
 const ttsTemplate = ref("");
-const ttsTemplates = reactive([
-  { value: "template1", label: "模板1" },
-  { value: "template2", label: "模板2" },
-  { value: "template3", label: "模板3" },
-]);
+const ttsTemplates = reactive([{ value: "default", label: "默认" }]);
 const save = () => {
   console.log("save");
 };

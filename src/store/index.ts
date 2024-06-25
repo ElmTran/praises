@@ -13,6 +13,6 @@ export async function initStore() {
   store.value = new Store(appConfigPath);
   await watch(appConfigPath, async () => {
     await store.value.load();
-    await invoke("reload_store"); // 回调rust重新加载store
+    await invoke("reload_store"); // TODO: 回调rust重新加载store
   });
 }

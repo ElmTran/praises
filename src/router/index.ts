@@ -10,7 +10,7 @@ const routes = [
     component: () => import("../views/TTSView/index.vue"),
     meta: {
       title: "TTS",
-      icon: IEpMicrophone,
+      icon: IEpMicrophone,      // TODO: 换一种图标
     },
   },
   {
