@@ -13,7 +13,6 @@
     "@tauri-apps/api": "^1.5.6",
     "element-plus": "^2.7.2",
     "microsoft-cognitiveservices-speech-sdk": "^1.36.0",
-    "pinia": "^2.1.7",
     "tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch#v1",
     "tauri-plugin-log-api": "github:tauri-apps/tauri-plugin-log#v1",
     "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1",

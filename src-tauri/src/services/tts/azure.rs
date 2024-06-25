@@ -1,5 +1,6 @@
 use reqwest::Client;
 use crate::config;
+use log::info;
 
 fn build_ssml(
     text: &str,
@@ -53,12 +54,13 @@ async fn send_request(xml: String) -> Result<Vec<u8>, String> {
         Ok(res) => {
             if res.status().is_success() {
                 let audio = res.bytes().await.unwrap();
+                info!("Azure TTS succeeded");
                 Ok(audio.to_vec())
             } else {
                 Err(format!("Azure TTS failed with status code: {}", res.status()))
             }
         }
-        Err(e) => Err(e.to_string()),
+        Err(e) => { Err(format!("Azure TTS failed with error: {}", e)) }
     }
 }
 

@@ -2,6 +2,8 @@ use crate::config;
 use crate::cmd::*;
 use once_cell::sync::OnceCell;
 use log::info;
+use log::LevelFilter;
+use env_logger;
 
 pub static HANDLE: OnceCell<tauri::AppHandle> = OnceCell::new(); // define a static variable to store the app handle (singleton)
 
@@ -11,6 +13,7 @@ pub struct AppBuidler {
 
 impl AppBuidler {
     pub async fn build() -> Result<Self, tauri::Error> {
+        env_logger::builder().filter_level(LevelFilter::Info).init();
         let builder = tauri::Builder
             ::default()
             .plugin(tauri_plugin_fs_watch::init())
