@@ -53,6 +53,15 @@ export default defineConfig(async () => ({
           },
         },
       ],
+      content: {
+        pipeline: {
+          include: [
+            /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+            "src/router/index.ts",
+          ],
+          // exclude: []
+        },
+      },
     }),
   ],
 

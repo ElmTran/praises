@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import IEpMicrophone from "../assets/icons/iep/microphone.vue";
-import IEpSettings from "../assets/icons/iep/settings.vue";
-
 const routes = [
   {
     path: "/",
@@ -10,7 +7,7 @@ const routes = [
     component: () => import("../views/TTSView/index.vue"),
     meta: {
       title: "TTS",
-      icon: IEpMicrophone,      // TODO: 换一种图标
+      icon: "i-ep-microphone",
     },
   },
   {
@@ -19,7 +16,7 @@ const routes = [
     component: () => import("../views/ConfigView/index.vue"),
     meta: {
       title: "Config",
-      icon: IEpSettings,
+      icon: "i-ep-tools",
     },
   },
 ];
