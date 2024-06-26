@@ -3242,7 +3242,6 @@ dependencies = [
  "tauri-plugin-log",
  "tauri-plugin-store",
  "tauri-runtime-wry",
- "tempfile",
  "tokio",
 ]
 
