@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/tauri";
 
 export async function Convert(): Promise<string> {
-  return await invoke("speak", {
+  return await invoke("apply", {
     text: "Hello, World!",
     language: "en-US",
     style: "chat",
