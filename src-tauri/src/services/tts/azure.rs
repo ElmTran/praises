@@ -1,6 +1,8 @@
 use reqwest::Client;
 use crate::config;
 use log::info;
+use std::error::Error;
+use reqwest::Url;
 
 fn build_ssml(
     text: &str,
@@ -36,31 +38,35 @@ fn build_ssml(
     )
 }
 
-async fn send_request(xml: String) -> Result<Vec<u8>, String> {
-    let subscription = config::get("azure.subscription").unwrap();
-    let endpoint = config::get("azure.endpoint").unwrap();
+async fn send_request(xml: String) -> Result<Vec<u8>, Box<dyn Error>> {
+    let endpoint = match config::get("azure.endpoint") {
+        Some(v) => Url::parse(v.as_str().ok_or("Azure endpoint must be a string")?)?,
+        None => {
+            return Err("Missing Azure endpoint".into());
+        }
+    };
+    let subscription = match config::get("azure.subscription") {
+        Some(v) => v.as_str().ok_or("Azure subscription key must be a string")?.to_string(),
+        None => {
+            return Err("Missing Azure subscription key".into());
+        }
+    };
     let client = Client::new();
-
     let res = client
-        .post(endpoint.to_string())
-        .header("Ocp-Apim-Subscription-Key", subscription.to_string())
+        .post(endpoint)
+        .header("Ocp-Apim-Subscription-Key", subscription)
         .header("Content-Type", "application/ssml+xml")
         .header("X-Microsoft-OutputFormat", "audio-24khz-160kbitrate-mono-mp3")
         .header("User-Agent", "curl")
         .body(xml)
-        .send().await;
+        .send().await?;
 
-    match res {
-        Ok(res) => {
-            if res.status().is_success() {
-                let audio = res.bytes().await.unwrap();
-                info!("Azure TTS succeeded");
-                Ok(audio.to_vec())
-            } else {
-                Err(format!("Azure TTS failed with status code: {}", res.status()))
-            }
-        }
-        Err(e) => { Err(format!("Azure TTS failed with error: {}", e)) }
+    if res.status().is_success() {
+        let audio = res.bytes().await?;
+        info!("Azure TTS succeeded");
+        Ok(audio.to_vec())
+    } else {
+        Err(format!("Azure TTS failed with status code: {}", res.status()).into())
     }
 }
 
@@ -73,5 +79,5 @@ pub async fn convert(
     pitch: &str
 ) -> Result<Vec<u8>, String> {
     let xml = build_ssml(text, speaker, language, style, rate, pitch);
-    send_request(xml).await
+    send_request(xml).await.map_err(|e| format!("Azure TTS failed: {}", e))
 }

@@ -22,7 +22,6 @@ pub async fn speak(
     pitch: &str
 ) -> Result<(), String> {
     let audio = azure::convert(text, speaker, language, style, rate, pitch).await;
-    // TODO: 转化有问题，需要修改
     match audio {
         Ok(audio) => {
             audio::play_async(&audio).await.map_err(|e| format!("Failed to play audio: {}", e))?;
@@ -38,7 +37,7 @@ pub async fn speak(
         }
         Err(e) => {
             error!("Failed to convert text to audio: {}", e);
-            Err(e)
+            Err("Failed to convert text to audio".to_string())
         }
     }
 }
