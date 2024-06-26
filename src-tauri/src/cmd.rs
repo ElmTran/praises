@@ -2,11 +2,10 @@
 use crate::app::HANDLE;
 use crate::services::tts::{ azure, windows };
 use crate::config;
-use crate::libs::audio;
 use log::{ info, error };
-use std::io::Write;
-use tempfile::NamedTempFile;
+use std::fs::write;
 use tauri::Manager;
+use tauri::api::path::cache_dir;
 
 #[tauri::command]
 pub fn get_windows_devices() -> Result<Vec<windows::Device>, String> {
@@ -26,15 +25,13 @@ pub async fn apply(
     let audio = azure::convert(text, speaker, language, style, rate, pitch).await;
     match audio {
         Ok(audio) => {
-            // audio::play_async(&audio).await.map_err(|e| format!("Failed to play audio: {}", e))?;
-            let mut temp_file = NamedTempFile::new().map_err(|e|
-                format!("Failed to create temporary file: {}", e)
+            let temp_dir = cache_dir().ok_or("Failed to get cache directory".to_string())?;
+            let temp_file_path = temp_dir.join("temp_audio.mp3");
+            write(&temp_file_path, &audio).map_err(|e|
+                format!("Failed to write audio to file: {}", e)
             )?;
-            temp_file
-                .write_all(&audio)
-                .map_err(|e| format!("Failed to write audio to temporary file: {}", e))?;
-            info!("Audio saved to: {}", temp_file.path().to_str().unwrap());
-            config::set("audioSrc", temp_file.path().to_str().unwrap());
+            info!("Audio file written to: {:?}", temp_file_path);
+            config::set("audioSrc", temp_file_path.to_str().unwrap());
             Ok(())
         }
         Err(e) => {
