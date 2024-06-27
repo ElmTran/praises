@@ -12,6 +12,7 @@ const app = createApp(App);
 app.use(router);
 app.use(ElementPlus);
 
-initStore().then(() => {
+(async () => {
+  initStore();
   app.mount("#app");
-});
+})();
