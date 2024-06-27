@@ -80,4 +80,5 @@ pub async fn convert(
 ) -> Result<Vec<u8>, String> {
     let xml = build_ssml(text, speaker, language, style, rate, pitch);
     send_request(xml).await.map_err(|e| format!("Azure TTS failed: {}", e))
+    // todo: 保存临时文件，返回文件路径
 }

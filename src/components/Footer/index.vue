@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import { useAudioStore } from "../../store/modules/audio";
 const config = reactive({
   autoplay: false,
 });
-
-const audioStore = useAudioStore();
-
-const audioSrc = ref(URL.createObjectURL(new Blob([audioStore.audio])));
+const audioSrc = ref("");
 </script>
 <template>
   <el-footer class="footer">
