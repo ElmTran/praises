@@ -11,6 +11,9 @@ importers:
       '@tauri-apps/api':
         specifier: ^1.5.6
         version: 1.5.6
+      '@tauri-apps/plugin-store':
+        specifier: github:tauri-apps/tauri-plugin-store#v2
+        version: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/333f8bdd5edac9432a4fafb31c1284845878afe1
       element-plus:
         specifier: ^2.7.2
         version: 2.7.2(vue@3.4.27(typescript@5.4.5))
@@ -25,7 +28,7 @@ importers:
         version: https://codeload.github.com/tauri-apps/tauri-plugin-log/tar.gz/752531f21f626c9f9f1716a28c4a37054c679657
       tauri-plugin-store-api:
         specifier: github:tauri-apps/tauri-plugin-store#v1
-        version: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/b1ce9b38662a2990dddb30de1af88509a45e4625
+        version: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef
       vue:
         specifier: ^3.3.4
         version: 3.4.27(typescript@5.4.5)
@@ -654,6 +657,10 @@ packages:
     resolution: {integrity: sha512-LH5ToovAHnDVe5Qa9f/+jW28I6DeMhos8bNDtBOmmnaDpPmJmYLyHdeDblAWWWYc7KKRDg9/66vMuKyq0WIeFA==}
     engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
 
+  '@tauri-apps/api@2.0.0-beta.13':
+    resolution: {integrity: sha512-Np1opKANzRMF3lgJ9gDquBCB9SxlE2lRmNpVx1+L6RyzAmigkuh0ZulT5jMnDA3JLsuSDU135r/s4t/Pmx4atg==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+
   '@tauri-apps/cli-darwin-arm64@1.5.13':
     resolution: {integrity: sha512-wXsBp6FIsQ1yoAEJ8dao7BkVdOp5xlfgGyAbJVCFKU3LTUqKw4A+ayxO6CV2lFfSaOdzdU86z+eJsl38nzmoSg==}
     engines: {node: '>= 10'}
@@ -722,6 +729,10 @@ packages:
     resolution: {integrity: sha512-wULOJNb/Dxc/E+Z0+7MkaqKYAmdjGJEFpZ5xcNhvC3BVX1O6MbhHjXGfwfu4mgIGhVqY1KJaKoXx7EDZAlk7Pw==}
     engines: {node: '>= 10'}
     hasBin: true
+
+  '@tauri-apps/plugin-store@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/333f8bdd5edac9432a4fafb31c1284845878afe1':
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/333f8bdd5edac9432a4fafb31c1284845878afe1}
+    version: 2.0.0-beta.5
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -2076,8 +2087,8 @@ packages:
     resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-log/tar.gz/752531f21f626c9f9f1716a28c4a37054c679657}
     version: 0.0.0
 
-  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/b1ce9b38662a2990dddb30de1af88509a45e4625:
-    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/b1ce9b38662a2990dddb30de1af88509a45e4625}
+  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef:
+    resolution: {tarball: https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef}
     version: 0.0.0
 
   text-table@0.2.0:
@@ -2869,6 +2880,8 @@ snapshots:
 
   '@tauri-apps/api@1.5.6': {}
 
+  '@tauri-apps/api@2.0.0-beta.13': {}
+
   '@tauri-apps/cli-darwin-arm64@1.5.13':
     optional: true
 
@@ -2911,6 +2924,10 @@ snapshots:
       '@tauri-apps/cli-win32-arm64-msvc': 1.5.13
       '@tauri-apps/cli-win32-ia32-msvc': 1.5.13
       '@tauri-apps/cli-win32-x64-msvc': 1.5.13
+
+  '@tauri-apps/plugin-store@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/333f8bdd5edac9432a4fafb31c1284845878afe1':
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.13
 
   '@types/estree@1.0.5': {}
 
@@ -4526,9 +4543,9 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 1.5.3
 
-  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/b1ce9b38662a2990dddb30de1af88509a45e4625:
+  tauri-plugin-store-api@https://codeload.github.com/tauri-apps/tauri-plugin-store/tar.gz/51717bbde4101f44d3e2191907419f6f7085e2ef:
     dependencies:
-      '@tauri-apps/api': 1.5.3
+      '@tauri-apps/api': 1.5.6
 
   text-table@0.2.0: {}
 
