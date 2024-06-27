@@ -4,15 +4,16 @@ import { appConfigDir, join } from "@tauri-apps/api/path";
 import { watch } from "tauri-plugin-fs-watch-api";
 import { invoke } from "@tauri-apps/api";
 
-export const store = ref();
+async function appConfigPath() {
+  const appConfigDirPath = await appConfigDir();
+  return await join(appConfigDirPath, ".config.dat");
+}
+
+export const store = ref(new Store(await appConfigPath()));
 
 export async function initStore() {
-  const appConfigDirPath = await appConfigDir();
-  const appConfigPath = await join(appConfigDirPath, ".config.dat");
-  console.log("appConfigPath", appConfigPath);
-  store.value = new Store(appConfigPath);
-  await watch(appConfigPath, async () => {
+  await watch(await appConfigPath(), async () => {
     await store.value.load();
-    await invoke("reload_store"); // TODO: 回调rust重新加载store
+    await invoke("reload_store");
   });
 }

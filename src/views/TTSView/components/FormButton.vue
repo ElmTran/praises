@@ -8,7 +8,6 @@ const save = () => {
 };
 
 const convert = () => {
-  console.log("convert");
   Convert();
 };
 </script>

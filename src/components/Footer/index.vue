@@ -5,13 +5,12 @@ const config = reactive({
   autoplay: false,
 });
 
-const audioSrc = ref<string>("");
+const audioSrc = ref("");
 
-const getAudioSrc = async () => {
-  audioSrc.value = await store.value.get("audioSrc");
-};
-
-getAudioSrc();
+store.value.onKeyChange("audioSrc", (src: any) => {
+  console.log("src", src.value);
+  audioSrc.value = src.value;
+});
 </script>
 <template>
   <el-footer class="footer">
@@ -22,7 +21,6 @@ getAudioSrc();
           :src="audioSrc"
           :autoplay="config.autoplay"
           controls
-          controlslist="nodownload"
           class="audio-player"
         />
       </div>

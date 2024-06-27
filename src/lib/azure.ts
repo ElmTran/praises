@@ -11,7 +11,7 @@ export async function Convert() {
     pitch: "0%",
   });
   const audioSrc = URL.createObjectURL(
-    new Blob([audio], { type: "audio/wav" })
+    new Blob([audio], { type: "audio/wav" }),
   );
-  store.value.set("audioSrc", audioSrc);
+  await store.value.set("audioSrc", { value: audioSrc });
 }
