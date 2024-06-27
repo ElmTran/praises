@@ -6,11 +6,14 @@ import "uno.css";
 import "element-plus/dist/index.css";
 import router from "./router";
 import { initStore } from "./store";
+import { createPinia } from "pinia";
 
+const pinia = createPinia();
 const app = createApp(App);
 
 app.use(router);
 app.use(ElementPlus);
+app.use(pinia);
 
 (async () => {
   initStore();
