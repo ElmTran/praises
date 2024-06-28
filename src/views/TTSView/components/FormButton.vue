@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import { Convert } from "../../../lib/azure.ts";
+import { useTtsStore } from "../../../store/tts";
+
 const ttsTemplate = ref("");
 const ttsTemplates = reactive([{ value: "default", label: "默认" }]);
+const ttsStore = useTtsStore();
+
 const save = () => {
   console.log("save");
 };
 
 const convert = () => {
-  Convert();
+  ttsStore.setAudioUrl();
 };
 </script>
 

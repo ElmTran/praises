@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
+import { useTtsStore } from "../../store/tts";
+import { storeToRefs } from "pinia";
+
 const config = reactive({
   autoplay: false,
 });
-const audioSrc = ref("");
+const ttsStore = useTtsStore();
+const { audioUrl } = storeToRefs(ttsStore);
 </script>
 <template>
   <el-footer class="footer">
@@ -11,7 +15,7 @@ const audioSrc = ref("");
       <div class="play-bar__controls">
         <audio
           ref="audioPlayer"
-          :src="audioSrc"
+          :src="audioUrl"
           :autoplay="config.autoplay"
           controls
           class="audio-player"
