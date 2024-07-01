@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import {
-  languageOptions,
-  voiceOptions,
-  styleOptions,
-  roleOptions,
-} from "../../../utils/constants";
+import { ref } from "vue";
+import { languageOptions, speakerOptions } from "../../../utils/constants";
+import { useTtsStore } from "../../../store/tts";
+import { storeToRefs } from "pinia";
 
-const condition = reactive({
-  language: "",
-  voice: "",
-  style: "",
-  role: "",
-  speed: 1,
-  pitch: 1,
-});
+type OptionType = { value: string; label: string };
+
+const ttsStore = useTtsStore();
+const { state } = storeToRefs(ttsStore);
+const styleOptions = ref<OptionType[]>([]);
+const roleOptions = ref<OptionType[]>([]);
+const useStyleAndRoleOptions = (value: string) => {
+  const speaker = speakerOptions.find((item) => item.value === value);
+  styleOptions.value = speaker?.styles || [];
+  roleOptions.value = speaker?.roles || [];
+};
 </script>
 <template>
   <div class="tts-form">
     <el-form label-position="top">
       <el-form-item label="Language">
-        <el-select v-model="condition.language" placeholder="please select">
+        <el-select v-model="state.language" placeholder="please select">
           <el-option
             v-for="item in languageOptions"
             :key="item.value"
@@ -29,18 +29,22 @@ const condition = reactive({
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Voice">
-        <el-select v-model="condition.voice" placeholder="please select">
+      <el-form-item label="Speaker">
+        <el-select
+          v-model="state.speaker"
+          placeholder="please select"
+          @change="useStyleAndRoleOptions"
+        >
           <el-option
-            v-for="item in voiceOptions"
+            v-for="item in speakerOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value"
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Style">
-        <el-select v-model="condition.style" placeholder="please select">
+      <el-form-item v-if="styleOptions.length" label="Style">
+        <el-select v-model="state.style" placeholder="please select">
           <el-option
             v-for="item in styleOptions"
             :key="item"
@@ -49,8 +53,8 @@ const condition = reactive({
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Role">
-        <el-select v-model="condition.role" placeholder="please select">
+      <el-form-item v-if="roleOptions.length" label="Role">
+        <el-select v-model="state.role" placeholder="please select">
           <el-option
             v-for="item in roleOptions"
             :key="item"
@@ -59,11 +63,11 @@ const condition = reactive({
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Speed">
-        <el-slider v-model="condition.speed" :min="0" :max="100" />
+      <el-form-item label="Rate">
+        <el-slider v-model="state.rate" :min="0" :max="100" />
       </el-form-item>
       <el-form-item label="Pitch">
-        <el-slider v-model="condition.pitch" :min="0" :max="100" />
+        <el-slider v-model="state.pitch" :min="0" :max="100" />
       </el-form-item>
     </el-form>
   </div>

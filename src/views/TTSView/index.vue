@@ -3,10 +3,13 @@ import { ref, reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
 import WindowsForm from "./components/WindowsForm.vue";
 import FormButton from "./components/FormButton.vue";
+import { useTtsStore } from "../../store/tts";
+import { storeToRefs } from "pinia";
 
 type ServiceType = "azure" | "edge" | "windows";
 
-const text = ref("");
+const ttsStore = useTtsStore();
+const { state } = storeToRefs(ttsStore);
 const service = ref<ServiceType>("azure");
 const services = reactive([
   { value: "azure", label: "Azure" },
@@ -25,10 +28,10 @@ const forms: Record<ServiceType, typeof AzureForm> = {
   <el-main>
     <div class="textarea-container">
       <el-input
+        v-model="state.text"
         type="textarea"
         :rows="10"
         placeholder="请输入文本"
-        v-model="text"
       />
     </div>
     <div class="options-container">

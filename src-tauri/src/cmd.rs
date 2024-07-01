@@ -11,15 +11,16 @@ pub fn get_windows_devices() -> Result<Vec<windows::Device>, String> {
 
 #[tauri::command]
 // TODO: encapsulate the parameters in a struct including service name
-pub async fn apply(
+pub async fn convert(
     text: &str,
     speaker: &str,
     language: &str,
     style: &str,
+    role: &str,
     rate: &str,
     pitch: &str
 ) -> Result<Vec<u8>, String> {
-    azure::convert(text, speaker, language, style, rate, pitch).await
+    azure::request(text, speaker, language, style, role, rate, pitch).await
 }
 
 #[tauri::command]
