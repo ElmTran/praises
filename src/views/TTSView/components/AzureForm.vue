@@ -15,6 +15,7 @@ const useStyleAndRoleOptions = (value: string) => {
   styleOptions.value = speaker?.styles || [];
   roleOptions.value = speaker?.roles || [];
 };
+useStyleAndRoleOptions(state.value.speaker);
 </script>
 <template>
   <div class="tts-form">
@@ -47,9 +48,9 @@ const useStyleAndRoleOptions = (value: string) => {
         <el-select v-model="state.style" placeholder="please select">
           <el-option
             v-for="item in styleOptions"
-            :key="item"
-            :label="item"
-            :value="item"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
           />
         </el-select>
       </el-form-item>
@@ -57,9 +58,9 @@ const useStyleAndRoleOptions = (value: string) => {
         <el-select v-model="state.role" placeholder="please select">
           <el-option
             v-for="item in roleOptions"
-            :key="item"
-            :label="item"
-            :value="item"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
           />
         </el-select>
       </el-form-item>
