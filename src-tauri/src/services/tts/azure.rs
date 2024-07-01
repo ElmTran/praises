@@ -9,6 +9,7 @@ fn build_ssml(
     speaker: &str,
     language: &str,
     style: &str,
+    role: &str,
     rate: &str,
     pitch: &str
 ) -> String {
@@ -21,7 +22,7 @@ fn build_ssml(
                 xml:lang="{}"
             >
             <voice name="{}">
-                <mstts:express-as style="{}">
+                <mstts:express-as style="{}" role="{}">
                     <prosody rate="{}" pitch="{}">
                         {}
                     </prosody>
@@ -32,13 +33,14 @@ fn build_ssml(
         language,
         speaker,
         style,
+        role,
         rate,
         pitch,
         text
     )
 }
 
-async fn send_request(xml: String) -> Result<Vec<u8>, Box<dyn Error>> {
+async fn send(xml: String) -> Result<Vec<u8>, Box<dyn Error>> {
     let endpoint = match config::get("azure.endpoint") {
         Some(v) => Url::parse(v.as_str().ok_or("Azure endpoint must be a string")?)?,
         None => {
@@ -70,14 +72,15 @@ async fn send_request(xml: String) -> Result<Vec<u8>, Box<dyn Error>> {
     }
 }
 
-pub async fn convert(
+pub async fn request(
     text: &str,
     speaker: &str,
     language: &str,
     style: &str,
+    role: &str,
     rate: &str,
     pitch: &str
 ) -> Result<Vec<u8>, String> {
-    let xml = build_ssml(text, speaker, language, style, rate, pitch);
-    send_request(xml).await.map_err(|e| format!("Azure TTS failed: {}", e))
+    let xml = build_ssml(text, speaker, language, style, role, rate, pitch);
+    send(xml).await.map_err(|e| format!("Azure TTS failed: {}", e))
 }

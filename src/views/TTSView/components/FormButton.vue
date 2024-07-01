@@ -11,7 +11,7 @@ const save = () => {
 };
 
 const convert = () => {
-  ttsStore.setAudioUrl();
+  ttsStore.convert();
 };
 </script>
 

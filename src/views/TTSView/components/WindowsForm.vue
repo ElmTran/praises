@@ -2,7 +2,6 @@
 import { ref, reactive } from "vue";
 import { DeviceOption, getDevices } from "../../../lib/windows";
 
-import { voiceOptions } from "../../../utils/constants";
 const condition = reactive({
   device: "",
   voice: "",
@@ -24,16 +23,6 @@ fetchDevices();
         <el-select v-model="condition.device" placeholder="please select">
           <el-option
             v-for="item in devices"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Voice">
-        <el-select v-model="condition.voice" placeholder="please select">
-          <el-option
-            v-for="item in voiceOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value"
