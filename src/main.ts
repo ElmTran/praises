@@ -5,7 +5,7 @@ import "./styles.css";
 import "uno.css";
 import "element-plus/dist/index.css";
 import router from "./router";
-import { initStore } from "./store";
+import { initStore } from "./store/config";
 import { createPinia } from "pinia";
 
 const pinia = createPinia();

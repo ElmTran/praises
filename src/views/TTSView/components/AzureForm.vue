@@ -18,10 +18,14 @@ const useStyleAndRoleOptions = (value: string) => {
 useStyleAndRoleOptions(state.value.speaker);
 </script>
 <template>
-  <div class="tts-form">
-    <el-form label-position="top">
+  <div class="tts-form" :inline="true" label-width="140px">
+    <el-form>
       <el-form-item label="Language">
-        <el-select v-model="state.language" placeholder="please select">
+        <el-select
+          v-model="state.language"
+          placeholder="please select"
+          class="form-item"
+        >
           <el-option
             v-for="item in languageOptions"
             :key="item.value"
@@ -34,6 +38,7 @@ useStyleAndRoleOptions(state.value.speaker);
         <el-select
           v-model="state.speaker"
           placeholder="please select"
+          class="form-item"
           @change="useStyleAndRoleOptions"
         >
           <el-option
@@ -45,7 +50,11 @@ useStyleAndRoleOptions(state.value.speaker);
         </el-select>
       </el-form-item>
       <el-form-item v-if="styleOptions.length" label="Style">
-        <el-select v-model="state.style" placeholder="please select">
+        <el-select
+          v-model="state.style"
+          placeholder="please select"
+          class="form-item"
+        >
           <el-option
             v-for="item in styleOptions"
             :key="item.value"
@@ -55,7 +64,11 @@ useStyleAndRoleOptions(state.value.speaker);
         </el-select>
       </el-form-item>
       <el-form-item v-if="roleOptions.length" label="Role">
-        <el-select v-model="state.role" placeholder="please select">
+        <el-select
+          v-model="state.role"
+          placeholder="please select"
+          class="form-item"
+        >
           <el-option
             v-for="item in roleOptions"
             :key="item.value"
@@ -65,19 +78,40 @@ useStyleAndRoleOptions(state.value.speaker);
         </el-select>
       </el-form-item>
       <el-form-item label="Rate">
-        <el-slider v-model="state.rate" :min="0" :max="100" />
+        <el-slider
+          v-model="state.rate"
+          :min="0"
+          :max="100"
+          size="small"
+          class="form-item-slider"
+        />
       </el-form-item>
       <el-form-item label="Pitch">
-        <el-slider v-model="state.pitch" :min="0" :max="100" />
+        <el-slider
+          v-model="state.pitch"
+          :min="0"
+          :max="100"
+          size="small"
+          class="form-item-slider"
+        />
       </el-form-item>
     </el-form>
   </div>
 </template>
 <style scoped lang="scss">
 .tts-form {
+  padding: 0 5px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px;
+  margin: 10px 0;
+  .form-item {
+    width: 160px;
+    margin-left: auto;
+  }
+  .form-item-slider {
+    width: 150px;
+    margin-left: auto;
+  }
 }
 </style>
