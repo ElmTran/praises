@@ -13,14 +13,17 @@ const isActived = ref(router.currentRoute.value.path);
     router
   >
     <el-menu-item v-for="route in routes" :key="route.path" :index="route.path">
-      <component :is="route.meta.icon" />
+      <component :is="route.meta.icon" class="el-menu__icon" />
       <template #title>{{ route.meta.title }}</template>
     </el-menu-item>
   </el-menu>
 </template>
 
 <style scoped lang="scss">
-.el-aside {
-  display: flex;
+.el-menu {
+  width: 53px;
+  .el-menu-item {
+    display: flex;
+  }
 }
 </style>

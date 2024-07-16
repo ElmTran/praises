@@ -12,7 +12,7 @@ const { audioUrl } = storeToRefs(ttsStore);
 <template>
   <el-footer class="footer">
     <div class="play-bar">
-      <div class="play-bar__controls">
+      <span class="play-bar__controls">
         <audio
           ref="audioPlayer"
           :src="audioUrl"
@@ -20,17 +20,36 @@ const { audioUrl } = storeToRefs(ttsStore);
           controls
           class="audio-player"
         />
-      </div>
-      <div class="play-bar__button">
+      </span>
+      <span class="play-bar__button">
         <el-button
           type="primary"
           icon="i-ep-download"
           circle
           class="download"
         />
-      </div>
+      </span>
     </div>
   </el-footer>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.footer {
+  background-color: #f5f7fa;
+  padding: 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .play-bar {
+    display: flex;
+    align-items: center;
+    .play-bar__controls {
+      display: flex;
+    }
+    .play-bar__button {
+      margin-left: 20px;
+    }
+  }
+}
+</style>
