@@ -13,9 +13,9 @@ const { state } = storeToRefs(ttsStore);
 const service = ref<ServiceType>("azure");
 const services = reactive([
   { value: "azure", label: "Azure" },
-  { value: "edge", label: "Edge" },
-  { value: "windows", label: "Windows" },
-  { value: "chat_tts", label: "ChatTTS" },
+  // { value: "edge", label: "Edge" },
+  // { value: "windows", label: "Windows" },
+  // { value: "chat_tts", label: "ChatTTS" },
 ]);
 
 const forms: Record<ServiceType, typeof AzureForm> = {
@@ -29,29 +29,24 @@ const forms: Record<ServiceType, typeof AzureForm> = {
     <el-row :gutter="10" class="main-container">
       <el-col :span="16">
         <div class="textarea-container">
-          <el-input
-            v-model="state.text"
-            type="textarea"
-            placeholder="请输入文本"
-            autosize
-          />
+          <textarea id="textarea" v-model="state.text" name="textarea" />
         </div>
       </el-col>
-      <el-col :span="8">
-        <div class="options-container">
-          <el-select v-model="service" placeholder="请选择服务">
-            <el-option
-              v-for="item in services"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
-          <component :is="forms[service]" />
-          <div class="bottom-container">
-            <FormButton />
-          </div>
-        </div>
+      <el-col :span="8" class="form-container">
+        <el-select
+          v-model="service"
+          placeholder="Please select service"
+          class="service-select"
+        >
+          <el-option
+            v-for="item in services"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        <component :is="forms[service]" />
+        <FormButton />
       </el-col>
     </el-row>
   </el-main>
@@ -66,23 +61,35 @@ const forms: Record<ServiceType, typeof AzureForm> = {
   height: 100%;
 }
 .textarea-container {
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  margin-bottom: 20px;
-  .el-textarea__inner {
-    flex: 1;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  textarea {
+    border-radius: 8px;
+    width: 100%;
+    height: 450px;
+    resize: none;
+    color: #fff;
+    border: 1px solid #414141;
+    background-color: transparent;
+    font-family: inherit;
+    padding: 12px 16px;
+    box-sizing: border-box; // make padding included in width
+  }
+  textarea:focus {
+    outline: none;
+    border: 1px solid rgba(202, 94, 155, 0.7);
+    box-shadow: rgba(245, 73, 145, 0.2) 0px 0px 0px 1px;
   }
 }
-.options-container {
+
+.form-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  padding: 20px 0;
   .el-select {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
-}
-.bottom-container {
-  margin-top: auto;
 }
 </style>

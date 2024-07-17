@@ -12,12 +12,16 @@ export const useTtsStore = defineStore("tts", () => {
     speaker: "en-US-AriaNeural",
     style: "chat",
     role: "",
-    rate: "0%",
-    pitch: "0%",
+    rate: 0,
+    pitch: 0,
   });
   async function convert() {
     try {
-      const resp: Uint8Array | string = await invoke("convert", state);
+      console.log("state", state);
+      const rate = state.rate.toString();
+      const pitch = state.pitch.toString();
+      const payload = { ...state, rate: rate, pitch: pitch };
+      const resp: Uint8Array | string = await invoke("convert", payload);
       if (typeof resp === "string") {
         console.error(`convert error: ${resp}`);
         return;

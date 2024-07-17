@@ -23,7 +23,7 @@ fn build_ssml(
             >
             <voice name="{}">
                 <mstts:express-as style="{}" role="{}">
-                    <prosody rate="{}" pitch="{}">
+                    <prosody rate="{}%" pitch="{}%">
                         {}
                     </prosody>
                 </mstts:express-as>

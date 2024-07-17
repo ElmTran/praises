@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
 import { useTtsStore } from "../../../store/tts";
-
-const ttsTemplate = ref("");
-const ttsTemplates = reactive([{ value: "default", label: "默认" }]);
 const ttsStore = useTtsStore();
-
-const save = () => {
-  console.log("save");
-};
 
 const convert = () => {
   ttsStore.convert();
@@ -16,56 +8,55 @@ const convert = () => {
 </script>
 
 <template>
-  <div class="tts-control">
-    <div class="control-bar">
-      <span>
-        <el-select
-          v-model="ttsTemplate"
-          placeholder="请选择模板"
-          style="width: 160px"
-        >
-          <el-option
-            v-for="item in ttsTemplates"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </span>
-      <button class="save-btn" @click="save">
-        <span class="text">Save</span>
-      </button>
-    </div>
-    <button class="convert-btn" @click="convert">Convert</button>
+  <div class="bottom-container">
+    <button class="button" @click="convert">
+      <span class="button-content">Convert</span>
+    </button>
   </div>
 </template>
 <style scoped lang="scss">
-.tts-control {
-  .control-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    .save-btn {
-      margin-left: 10px;
-      background-color: #67c23a;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      .text {
-        padding: 0 10px;
-      }
-    }
-  }
-  .convert-btn {
-    margin-top: 10px;
-    width: 100%;
-    height: 40px;
-    background-color: #409eff;
+.bottom-container {
+  display: flex;
+  justify-content: center;
+  .button {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    width: 8rem;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    background-size: 400%;
     color: #fff;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+  }
+
+  .button:hover::before {
+    transform: scaleX(1);
+  }
+
+  .button-content {
+    position: relative;
+    z-index: 1;
+    font-size: 1rem;
+  }
+
+  .button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      to bottom right,
+      rgba(93, 140, 233, 0.377) 10.8%,
+      rgba(218, 88, 238, 0.478) 94.3%
+    );
+    transition: all 0.475s;
   }
 }
 </style>
