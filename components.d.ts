@@ -28,6 +28,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/Footer/index.vue')['default']
     Greet: typeof import('./src/components/Greet.vue')['default']
     Header: typeof import('./src/components/Header/index.vue')['default']
+    IEpDownload: typeof import('~icons/ep/download')['default']
     IEpMicrophone: typeof import('~icons/ep/microphone')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
