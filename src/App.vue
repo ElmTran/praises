@@ -4,7 +4,6 @@
       <SideBar />
       <el-container class="main">
         <router-view />
-        <Footer />
       </el-container>
     </el-container>
   </div>
