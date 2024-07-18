@@ -88,8 +88,8 @@ const forms: Record<ServiceType, typeof AzureForm> = {
   display: flex;
   flex-direction: column;
   padding: 20px 0;
-  .el-select {
-    margin-bottom: 10px;
+  :deep(.el-select__wrapper) {
+    padding: 0.8rem 1rem;
   }
 }
 </style>

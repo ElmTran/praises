@@ -32,8 +32,9 @@ const save = () => {
         </template>
         <el-select
           v-model="state.language"
-          placeholder="please select"
           class="form-item"
+          placeholder="please select"
+          :popper-append-to-body="false"
         >
           <el-option
             v-for="item in languageOptions"
@@ -49,9 +50,8 @@ const save = () => {
         </template>
         <el-select
           v-model="state.speaker"
-          placeholder="please select"
           class="form-item"
-          @change="useStyleAndRoleOptions"
+          @change="useStyleAndRoleOptions(state.speaker)"
         >
           <el-option
             v-for="item in speakerOptions"
@@ -124,8 +124,9 @@ const save = () => {
       <span>
         <el-select
           v-model="ttsTemplate"
-          placeholder="please select"
+          placeholder="Template"
           style="width: 160px"
+          clearable
         >
           <el-option
             v-for="item in ttsTemplates"
@@ -149,7 +150,7 @@ const save = () => {
   .el-form {
     .item-label {
       font-size: 14px;
-      color: rgba(0, 0, 0, 0.75);
+      color: #f1aaaa;
     }
     .form-item {
       width: 160px;
@@ -159,11 +160,17 @@ const save = () => {
       width: 150px;
       margin-left: auto;
     }
+    :deep(.el-select__wrapper) {
+      padding: 0.2rem 1rem;
+    }
   }
   .control-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    :deep(.el-select__wrapper) {
+      padding: 1rem 1rem;
+    }
     .save-btn {
       margin-left: 10px;
       background-color: #67c23a;
