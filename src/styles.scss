@@ -1,5 +1,5 @@
 :root {
-  font-family: Arial, Helvetica, Arial, sans-serif;
+  font-family: "Bitter", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
   background: linear-gradient(to bottom right, #495c7c, #9a5479);
   backdrop-filter: blur(5px);
@@ -93,5 +93,30 @@ h1 {
     background: rgba(251, 176, 199, 0.8) !important;
     backdrop-filter: blur(10px);
     border-color: transparent transparent rgba(251, 176, 199, 0.1) transparent !important;
+  }
+}
+
+.setting-container {
+  display: flex;
+  justify-content: center;
+  .el-form {
+    padding: 2em 1em;
+    .form-item__label {
+      margin-right: 5px;
+      color: rgba(244, 91, 91, 0.8);
+    }
+    .form-item {
+      width: 200px;
+      margin-left: auto;
+    }
+    .el-input__wrapper {
+      background: transparent;
+      border: none;
+      border-radius: 0.4em;
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+      .el-input__inner {
+        color: rgba(255, 255, 255, 0.95);
+      }
+    }
   }
 }

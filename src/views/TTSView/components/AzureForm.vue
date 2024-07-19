@@ -150,7 +150,7 @@ const save = () => {
   .el-form {
     .item-label {
       font-size: 14px;
-      color: #f1aaaa;
+      color: rgba(244, 91, 91, 0.8);
     }
     .form-item {
       width: 160px;
