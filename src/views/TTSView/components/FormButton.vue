@@ -39,6 +39,8 @@ const convert = () => {
     position: relative;
     z-index: 1;
     font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
   }
 
   .button::before {

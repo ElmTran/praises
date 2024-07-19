@@ -7,7 +7,7 @@ import router from "../../router";
       <button class="button" @click="router.push('/')">
         <i-ep-microphone class="icon" />
       </button>
-      <button class="button" @click="router.push('/config')">
+      <button class="button" @click="router.push('/setting')">
         <i-ep-tools class="icon" />
       </button>
     </section>
