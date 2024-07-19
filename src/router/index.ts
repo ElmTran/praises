@@ -7,16 +7,14 @@ const routes = [
     component: () => import("../views/TTSView/index.vue"),
     meta: {
       title: "TTS",
-      icon: "i-ep-microphone",
     },
   },
   {
-    path: "/config",
-    name: "Config",
-    component: () => import("../views/ConfigView/index.vue"),
+    path: "/setting",
+    name: "Setting",
+    component: () => import("../views/SettingView/index.vue"),
     meta: {
-      title: "Config",
-      icon: "i-ep-tools",
+      title: "Setting",
     },
   },
 ];
