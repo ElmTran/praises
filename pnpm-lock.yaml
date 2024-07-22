@@ -54,6 +54,9 @@ importers:
       '@iconify-json/ep':
         specifier: ^1.1.15
         version: 1.1.15
+      '@iconify-json/mdi':
+        specifier: ^1.1.67
+        version: 1.1.67
       '@tauri-apps/cli':
         specifier: ^1
         version: 1.5.13
@@ -503,6 +506,9 @@ packages:
 
   '@iconify-json/ep@1.1.15':
     resolution: {integrity: sha512-96JBJQrJhxYy+j+KE5lqyE+Y6O+06fVUdMaHJ1Rb9+bbOjI1tw6EwYl9H4SB6Hkf7zB80VX6GgG0yH0Z0c8K1Q==}
+
+  '@iconify-json/mdi@1.1.67':
+    resolution: {integrity: sha512-00nllHES8hyACwIfgySlQgAE6MKgpr2wsKfpifMiZWZ9aXC5l4Jb0lR3lJSWwXgOW6kzAOdzC3T+2VOfBBZ13A==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -2784,6 +2790,10 @@ snapshots:
   '@humanwhocodes/retry@0.2.4': {}
 
   '@iconify-json/ep@1.1.15':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/mdi@1.1.67':
     dependencies:
       '@iconify/types': 2.0.0
 
