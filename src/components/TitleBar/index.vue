@@ -22,7 +22,7 @@ window.addEventListener("resize", async () => {
       class="titlebar-button"
       @click="appWindow.toggleMaximize()"
     >
-      <icon :class="maximized ? 'i-mdi-window-restore' : 'i-mdi-maximize'" />
+      <i :class="maximized ? 'i-mdi-window-restore' : 'i-mdi-maximize'" />
     </button>
     <button
       id="titlebar-close"
@@ -35,7 +35,7 @@ window.addEventListener("resize", async () => {
 </template>
 <style scoped lang="scss">
 .titlebar {
-  height: 25px;
+  height: 30px;
   background: transparent;
   user-select: none;
   display: flex;
