@@ -28,11 +28,15 @@ declare module 'vue' {
     Footer: typeof import('./src/components/Footer/index.vue')['default']
     Greet: typeof import('./src/components/Greet.vue')['default']
     Header: typeof import('./src/components/Header/index.vue')['default']
+    IEpClose: typeof import('~icons/ep/close')['default']
     IEpDownload: typeof import('~icons/ep/download')['default']
     IEpMicrophone: typeof import('~icons/ep/microphone')['default']
+    IEpMinus: typeof import('~icons/ep/minus')['default']
     IEpTools: typeof import('~icons/ep/tools')['default']
+    IMdiMaximize: typeof import('~icons/mdi/maximize')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideBar: typeof import('./src/components/SideBar/index.vue')['default']
+    TitleBar: typeof import('./src/components/TitleBar/index.vue')['default']
   }
 }
