@@ -1,4 +1,5 @@
 <template>
+  <TitleBar />
   <div id="app">
     <el-container class="container">
       <SideBar />

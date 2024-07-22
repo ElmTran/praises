@@ -24,7 +24,7 @@ export default defineConfig(async () => ({
       resolvers: [
         ElementPlusResolver(),
         IconsResolver({
-          enabledCollections: ["ep"],
+          enabledCollections: ["ep", "mdi"],
         }),
       ],
     }),

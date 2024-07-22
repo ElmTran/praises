@@ -65,7 +65,8 @@
             {
                 "title": "praises",
                 "width": 900,
-                "height": 580
+                "height": 580,
+                "decorations": false
             }
         ],
         "security": {
