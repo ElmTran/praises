@@ -78,4 +78,7 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
+  build: {
+    target: "esnext", //browsers can handle the latest ES features
+  },
 }));
