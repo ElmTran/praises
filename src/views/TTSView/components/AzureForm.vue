@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 import { languageOptions, speakerOptions } from "../../../utils/constants";
 import { useTtsStore } from "../../../store/tts";
+import { useSettingStore } from "../../../store/setting";
 import { storeToRefs } from "pinia";
 
 type OptionType = { value: string; label: string };
 
-const ttsTemplate = ref("");
-const ttsTemplates = reactive([{ value: "default", label: "default" }]);
-
 const ttsStore = useTtsStore();
+const settingStore = useSettingStore();
 const { state } = storeToRefs(ttsStore);
+const { ttsTemplate } = storeToRefs(settingStore);
 const styleOptions = ref<OptionType[]>([]);
 const roleOptions = ref<OptionType[]>([]);
 const useStyleAndRoleOptions = (value: string) => {
@@ -18,9 +18,24 @@ const useStyleAndRoleOptions = (value: string) => {
   styleOptions.value = speaker?.styles || [];
   roleOptions.value = speaker?.roles || [];
 };
+const template = ref("");
 useStyleAndRoleOptions(state.value.speaker);
 const save = () => {
-  console.log("save");
+  if (!template.value) {
+    return;
+  }
+  const { text, ...value } = state.value;
+  settingStore.setTtsTemplate({
+    value: value,
+    name: template.value,
+  });
+};
+
+const changeTemplate = (value: string) => {
+  const template = ttsTemplate.value.find((item) => item.name === value);
+  if (template) {
+    ttsStore.setValue(template.value);
+  }
 };
 </script>
 <template>
@@ -123,21 +138,31 @@ const save = () => {
     <div class="control-bar">
       <span>
         <el-select
-          v-model="ttsTemplate"
-          placeholder="Template"
-          style="width: 160px"
+          v-model="template"
+          placeholder="Please enter a template name"
+          style="width: 140px"
           clearable
+          filterable
+          allow-create
+          @change="changeTemplate"
         >
           <el-option
-            v-for="item in ttsTemplates"
+            v-for="item in ttsTemplate"
             :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            :label="item.name"
+            :value="item.name"
           />
         </el-select>
       </span>
-      <button class="save-btn" @click="save">
-        <span class="text">Save</span>
+      <button class="saveBtn" @click="save">
+        <span class="IconContainer">
+          <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+            <path
+              d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"
+            />
+          </svg>
+        </span>
+        <p class="btnLabel">Save</p>
       </button>
     </div>
   </div>
@@ -167,21 +192,74 @@ const save = () => {
   .control-bar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 20px;
     :deep(.el-select__wrapper) {
       padding: 1rem 1rem;
     }
-    .save-btn {
-      margin-left: 10px;
-      background-color: #67c23a;
-      color: #fff;
+    .saveBtn {
+      width: 100px;
+      height: 40px;
+      border-radius: 40px;
       border: none;
-      border-radius: 4px;
+      box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition-duration: 0.3s;
+      overflow: hidden;
+    }
+
+    .IconContainer {
+      width: 30px;
       height: 30px;
-      .text {
-        padding: 0 10px;
-      }
+      background: linear-gradient(
+        to bottom,
+        rgba(172, 255, 136, 0.8),
+        rgba(70, 255, 73, 0.8)
+      );
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 2;
+      transition-duration: 0.3s;
+    }
+
+    .icon {
+      border-radius: 1px;
+    }
+
+    .btnLabel {
+      height: 100%;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      z-index: 1;
+      transition-duration: 0.3s;
+      font-size: 1.04em;
+    }
+
+    .saveBtn:hover .IconContainer {
+      width: 90px;
+      transition-duration: 0.3s;
+    }
+
+    .saveBtn:hover .btnLabel {
+      transform: translate(10px);
+      width: 0;
+      font-size: 0;
+      transition-duration: 0.3s;
+    }
+
+    .saveBtn:active {
+      transform: scale(0.95);
+      transition-duration: 0.3s;
     }
   }
 }

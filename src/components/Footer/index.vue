@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useTtsStore } from "../../store/tts";
+import { useSettingStore } from "../../store/setting";
 import { storeToRefs } from "pinia";
 
 const ttsStore = useTtsStore();
-const { audioUrl, autoplay } = storeToRefs(ttsStore);
+const settingStore = useSettingStore();
+const { audioUrl } = storeToRefs(ttsStore);
+const { autoplay } = storeToRefs(settingStore);
 </script>
 <template>
   <el-footer class="footer">

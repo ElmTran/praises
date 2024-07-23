@@ -1,19 +1,35 @@
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { configStore } from "./config.ts";
+
+type TemplateOption = {
+  value: {
+    language: string;
+    speaker: string;
+    style: string;
+    role: string;
+    rate: number;
+    pitch: number;
+  };
+  name: string;
+};
 
 export const useSettingStore = defineStore("setting", () => {
   const azure = reactive({
     region: "",
     subscription: "",
   });
+  const autoplay = ref();
+  const ttsTemplate = ref<TemplateOption[]>([]);
+
   async function load() {
     const endpoint: string | null =
       await configStore.value.get("azure.endpoint");
-    console.log(endpoint);
     azure.region = endpoint?.split(".")[0].split("https://")[1] || "";
     azure.subscription =
       (await configStore.value.get("azure.subscription")) || "";
+    autoplay.value = await configStore.value.get("tts.autoplay");
+    ttsTemplate.value = (await configStore.value.get("tts.template")) || [];
   }
 
   async function setAzureEndpoint() {
@@ -29,5 +45,25 @@ export const useSettingStore = defineStore("setting", () => {
     await configStore.value.save();
   }
 
-  return { azure, load, setAzureEndpoint, setAzureSubscription };
+  async function setAutoplay() {
+    await configStore.value.set("tts.autoplay", autoplay.value);
+    await configStore.value.save();
+  }
+
+  async function setTtsTemplate(template: TemplateOption) {
+    ttsTemplate.value.push(template);
+    await configStore.value.set("tts.template", ttsTemplate.value);
+    await configStore.value.save();
+  }
+
+  return {
+    azure,
+    autoplay,
+    ttsTemplate,
+    load,
+    setAzureEndpoint,
+    setAzureSubscription,
+    setAutoplay,
+    setTtsTemplate,
+  };
 });

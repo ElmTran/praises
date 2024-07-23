@@ -4,6 +4,9 @@ use once_cell::sync::OnceCell;
 use log::info;
 use log::LevelFilter;
 use env_logger;
+#[cfg(any(target_os = "macos", target_os = "windows"))]
+use window_shadows::set_shadow;
+use tauri::Manager;
 
 pub static HANDLE: OnceCell<tauri::AppHandle> = OnceCell::new(); // define a static variable to store the app handle (singleton)
 
@@ -30,6 +33,8 @@ impl AppBuidler {
                     // Set First Run
                     config::set("init", true);
                 }
+                let window = app.get_window("main").unwrap();
+                set_shadow(&window, true).unwrap();
                 Ok(())
             });
 
