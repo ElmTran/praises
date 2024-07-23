@@ -14,7 +14,6 @@ export const useTtsStore = defineStore("tts", () => {
     rate: 0,
     pitch: 0,
   });
-  const autoplay = ref(true);
   async function convert() {
     try {
       const rate = state.rate.toString();
@@ -26,11 +25,15 @@ export const useTtsStore = defineStore("tts", () => {
         return;
       }
       audioUrl.value = URL.createObjectURL(
-        new Blob([Buffer.from(resp)], { type: "audio/mp3" })
+        new Blob([Buffer.from(resp)], { type: "audio/mp3" }),
       );
     } catch (error) {
       console.error(`Failed to convert: ${error}`);
     }
   }
-  return { audioUrl, state, convert, autoplay };
+  async function setValue(values: Record<string, any>) {
+    console.log(values);
+    Object.assign(state, values);
+  }
+  return { audioUrl, state, convert, setValue };
 });
