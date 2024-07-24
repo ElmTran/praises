@@ -87,7 +87,7 @@ const forms: Record<ServiceType, typeof AzureForm> = {
 .form-container {
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 20px 0 0;
   :deep(.el-select__wrapper) {
     padding: 0.8rem 1rem;
   }

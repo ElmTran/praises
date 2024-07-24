@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { languageOptions, speakerOptions } from "../../../utils/constants";
+import { languageOptions, SpeakerOption } from "../../../utils/constants";
 import { useTtsStore } from "../../../store/tts";
 import { useSettingStore } from "../../../store/setting";
 import { storeToRefs } from "pinia";
@@ -11,15 +11,32 @@ const ttsStore = useTtsStore();
 const settingStore = useSettingStore();
 const { state } = storeToRefs(ttsStore);
 const { ttsTemplate } = storeToRefs(settingStore);
+const speakerOptions = ref<SpeakerOption[]>([]);
 const styleOptions = ref<OptionType[]>([]);
 const roleOptions = ref<OptionType[]>([]);
+const template = ref("");
+
+const useSpeakerOptions = (value: string) => {
+  const language = languageOptions.find((item) => item.value === value);
+  speakerOptions.value = language?.speakers || [];
+  state.value.speaker = speakerOptions.value[0].value;
+  useStyleAndRoleOptions(state.value.speaker);
+};
+
 const useStyleAndRoleOptions = (value: string) => {
-  const speaker = speakerOptions.find((item) => item.value === value);
+  const speaker = speakerOptions.value.find((item) => item.value === value);
   styleOptions.value = speaker?.styles || [];
   roleOptions.value = speaker?.roles || [];
 };
-const template = ref("");
-useStyleAndRoleOptions(state.value.speaker);
+
+const changeTemplate = (value: string) => {
+  const template = ttsTemplate.value.find((item) => item.name === value);
+  if (template) {
+    ttsStore.setValue(template.value);
+  }
+  useSpeakerOptions(state.value.language);
+};
+
 const save = () => {
   if (!template.value) {
     return;
@@ -29,13 +46,6 @@ const save = () => {
     value: value,
     name: template.value,
   });
-};
-
-const changeTemplate = (value: string) => {
-  const template = ttsTemplate.value.find((item) => item.name === value);
-  if (template) {
-    ttsStore.setValue(template.value);
-  }
 };
 </script>
 <template>
@@ -50,6 +60,7 @@ const changeTemplate = (value: string) => {
           class="form-item"
           placeholder="please select"
           :popper-append-to-body="false"
+          @change="useSpeakerOptions(state.language)"
         >
           <el-option
             v-for="item in languageOptions"
@@ -66,6 +77,7 @@ const changeTemplate = (value: string) => {
         <el-select
           v-model="state.speaker"
           class="form-item"
+          placeholder="please select"
           @change="useStyleAndRoleOptions(state.speaker)"
         >
           <el-option
@@ -191,11 +203,11 @@ const changeTemplate = (value: string) => {
   }
   .control-bar {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
     :deep(.el-select__wrapper) {
-      padding: 1rem 1rem;
+      padding: 0.8rem;
     }
     .saveBtn {
       width: 100px;

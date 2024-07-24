@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import router from "../../router";
+import { useTtsStore } from "../../store/tts";
+const ttsStore = useTtsStore();
+const goToSetting = () => {
+  ttsStore.audioUrl = "";
+  router.push("/setting");
+};
 </script>
 <template>
   <div class="sidebar-groups">
@@ -7,7 +13,7 @@ import router from "../../router";
       <button class="button" @click="router.push('/')">
         <i-ep-microphone class="icon" />
       </button>
-      <button class="button" @click="router.push('/setting')">
+      <button class="button" @click="goToSetting">
         <i-ep-tools class="icon" />
       </button>
     </section>

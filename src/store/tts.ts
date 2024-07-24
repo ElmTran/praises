@@ -7,9 +7,9 @@ export const useTtsStore = defineStore("tts", () => {
   const audioUrl = ref("");
   const state = reactive({
     text: "",
-    language: "en-US",
-    speaker: "en-US-AriaNeural",
-    style: "chat",
+    language: "",
+    speaker: "",
+    style: "",
     role: "",
     rate: 0,
     pitch: 0,
