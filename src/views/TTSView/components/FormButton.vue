@@ -21,8 +21,8 @@ const convert = () => {
   .button {
     position: relative;
     overflow: hidden;
-    height: 3rem;
-    width: 8rem;
+    height: 2.8rem;
+    width: 7rem;
     border-radius: 1.5rem;
     background: #3d3a4e;
     background-size: 400%;

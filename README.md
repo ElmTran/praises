@@ -2,7 +2,7 @@
 
 ## Roadmap
 
-- [ ] Azure API
+- [x] Azure API
 
 - [ ] CI/CD
 
