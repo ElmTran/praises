@@ -1,8 +1,8 @@
 [package]
 name = "praises"
-version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.0.1"
+description = "Praises is a text-to-speech tool that can help you read text easily."
+authors = ["ElmTran"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
