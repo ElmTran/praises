@@ -21,6 +21,8 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [ ] Edge API
 
+- [ ] i18n
+
 - [ ] ChatTTS API
 
 - [ ] GitHub Actions
