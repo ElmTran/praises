@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
 import WindowsForm from "./components/WindowsForm.vue";
 import FormButton from "./components/FormButton.vue";
 import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
 
-type ServiceType = "azure" | "edge" | "windows";
-
 const ttsStore = useTtsStore();
 const { state } = storeToRefs(ttsStore);
-const service = ref<ServiceType>("azure");
 const services = reactive([
   { value: "azure", label: "Azure" },
-  // { value: "edge", label: "Edge" },
+  { value: "msedge", label: "Microsoft Edge" },
+  // { value: "native", label: "Native" },
+  // { value: "tiktok", label: "TikTok" },
   // { value: "windows", label: "Windows" },
   // { value: "chat_tts", label: "ChatTTS" },
 ]);
 
-const forms: Record<ServiceType, typeof AzureForm> = {
+const forms: { [key: string]: typeof AzureForm } = {
   azure: AzureForm,
-  edge: AzureForm, // AzureForm is used for both Azure and Edge
+  msedge: AzureForm, // AzureForm is used for both Azure and Edge
   windows: WindowsForm,
 };
 </script>
@@ -34,7 +33,7 @@ const forms: Record<ServiceType, typeof AzureForm> = {
       </el-col>
       <el-col :span="8" class="form-container">
         <el-select
-          v-model="service"
+          v-model="state.service"
           placeholder="Please select service"
           class="service-select"
         >
@@ -45,7 +44,7 @@ const forms: Record<ServiceType, typeof AzureForm> = {
             :value="item.value"
           />
         </el-select>
-        <component :is="forms[service]" />
+        <component :is="forms[state.service]" />
         <FormButton />
       </el-col>
     </el-row>

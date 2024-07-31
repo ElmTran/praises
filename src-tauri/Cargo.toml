@@ -41,6 +41,9 @@ env_logger = "0.11.3"
 window-shadows = "0.2.2"
 lazy_static = "1.5.0"
 uuid = "1.10.0"
+tokio-tungstenite = { version = "0.23.1", features = ["native-tls"] }
+futures-util = "0.3.30"
+url = "2.5.2"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
