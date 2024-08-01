@@ -1,6 +1,5 @@
 use reqwest::Client;
 use crate::config;
-use log::info;
 use std::error::Error;
 use reqwest::Url;
 
@@ -65,7 +64,6 @@ async fn send(xml: String) -> Result<Vec<u8>, Box<dyn Error>> {
 
     if res.status().is_success() {
         let audio = res.bytes().await?;
-        info!("Azure TTS succeeded");
         Ok(audio.to_vec())
     } else {
         Err(format!("Azure TTS failed with status code: {}", res.status()).into())

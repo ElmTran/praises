@@ -1,5 +1,4 @@
-use log::{ info, error };
-use std::error::Error;
+use log::{ info, error, debug };
 use uuid::Uuid;
 use futures_util::{ StreamExt, SinkExt };
 use tokio_tungstenite::{
@@ -9,7 +8,6 @@ use tokio_tungstenite::{
     MaybeTlsStream,
 };
 use tokio::net::TcpStream;
-use std::collections::HashMap;
 
 static SYNTH_URL: &str =
     "wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4";
@@ -22,7 +20,6 @@ pub struct MsEdgeTTS {
     pitch: String,
     volume: String,
     ws: WebSocketStream<MaybeTlsStream<TcpStream>>,
-    streams: HashMap<String, Vec<Option<Vec<u8>>>>,
 }
 
 impl MsEdgeTTS {
@@ -35,7 +32,6 @@ impl MsEdgeTTS {
         volume: String
     ) -> Self {
         let ws = connect_async(SYNTH_URL).await.unwrap().0;
-        let mut streams = HashMap::new();
         Self {
             text,
             speaker,
@@ -44,7 +40,6 @@ impl MsEdgeTTS {
             pitch,
             volume,
             ws,
-            streams,
         }
     }
 
@@ -72,47 +67,47 @@ impl MsEdgeTTS {
         self.ws.send(Message::Text(request)).await.unwrap();
     }
 
-    fn extract_request_id(&self, message: &str) -> Result<String, Box<dyn Error>> {
-        if let Some(captures) = regex::Regex::new(r"X-RequestId:(.*?)\r\n")?.captures(message) {
-            Ok(captures[1].to_string())
-        } else {
-            Err("Request ID not found".into())
-        }
-    }
-
-    pub async fn receive(&mut self) -> Result<Vec<u8>, Box<dyn Error>> {
+    pub async fn receive(&mut self) -> Result<Vec<u8>, String> {
+        let mut stream = Vec::new();
         while let Some(message) = self.ws.next().await {
             match message {
                 Ok(Message::Binary(data)) => {
-                    let buffer = data.clone();
                     let msg = String::from_utf8_lossy(&data);
-                    let request_id = self.extract_request_id(&msg)?;
-                    info!("Received {} bytes for request {}", buffer.len(), request_id);
-                    if msg.contains("Path:turn.start") {
-                    } else if msg.contains("Path:turn.end") {
-                        if let Some(stream) = self.streams.get_mut(&request_id) {
-                            stream.push(Some(buffer));
-                        }
-                    } else if msg.contains("Path:response") {
-                        // context response, ignore
-                    } else if msg.contains("Path:audio") {
-                        info!("Received audio for request {}", request_id);
+                    if msg.contains("Path:audio") {
+                        let binary_delim = "Path:audio\r\n";
+                        let start_idx = data
+                            .windows(binary_delim.len())
+                            .position(|w| w == binary_delim.as_bytes());
+                        let audio_data = data[start_idx.unwrap() + binary_delim.len()..].to_vec();
+                        stream.push(audio_data);
+                    }
+                }
+                Ok(Message::Text(text)) => {
+                    if text.contains("Path:turn.start") {
+                        info!("Received turn.start");
+                    } else if text.contains("Path:turn.end") {
+                        info!("Received turn.end");
+                        self.ws.send(Message::Close(None)).await.unwrap();
+                        break;
+                    } else if text.contains("Path:response") {
+                        info!("Received response");
                     } else {
-                        info!("UNKNOWN MESSAGE: {}", msg);
+                        debug!("Received text: {}", text);
                     }
                 }
                 Ok(Message::Close(_)) => {
                     info!("Connection closed");
                     break;
                 }
-                Ok(_) => {}
+                Ok(_) => {
+                    error!("Received unexpected message");
+                }
                 Err(e) => {
-                    error!("Error: {}", e);
-                    break;
+                    error!("Error receiving message: {}", e);
                 }
             }
         }
-        Ok(vec![])
+        Ok(stream.concat())
     }
 
     fn build_ssml(&self) -> String {

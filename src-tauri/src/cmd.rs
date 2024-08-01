@@ -36,7 +36,7 @@ pub async fn convert(
             ).await;
             tts.init_client().await;
             tts.send().await;
-            tts.receive().await.map_err(|e| e.to_string())
+            tts.receive().await
         }
         "azure" => { azure::request(text, speaker, language, style, role, rate, pitch).await }
         _ => Err("Invalid service".to_string()),
