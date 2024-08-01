@@ -9,6 +9,7 @@ use tokio_tungstenite::{
     MaybeTlsStream,
 };
 use tokio::net::TcpStream;
+use std::collections::HashMap;
 
 static SYNTH_URL: &str =
     "wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4";
@@ -21,6 +22,7 @@ pub struct MsEdgeTTS {
     pitch: String,
     volume: String,
     ws: WebSocketStream<MaybeTlsStream<TcpStream>>,
+    streams: HashMap<String, Vec<Option<Vec<u8>>>>,
 }
 
 impl MsEdgeTTS {
@@ -33,6 +35,7 @@ impl MsEdgeTTS {
         volume: String
     ) -> Self {
         let ws = connect_async(SYNTH_URL).await.unwrap().0;
+        let mut streams = HashMap::new();
         Self {
             text,
             speaker,
@@ -41,6 +44,7 @@ impl MsEdgeTTS {
             pitch,
             volume,
             ws,
+            streams,
         }
     }
 
@@ -68,47 +72,37 @@ impl MsEdgeTTS {
         self.ws.send(Message::Text(request)).await.unwrap();
     }
 
-    fn parse_headers(&self, s: impl AsRef<str>) -> Vec<(String, String)> {
-        s.as_ref()
-            .split("\r\n")
-            .filter_map(|s| {
-                if s.len() > 0 {
-                    let mut iter = s.splitn(2, ":");
-                    let k = iter.next().unwrap_or("").to_owned();
-                    let v = iter.next().unwrap_or("").to_owned();
-                    Some((k, v))
-                } else {
-                    None
-                }
-            })
-            .collect()
+    fn extract_request_id(&self, message: &str) -> Result<String, Box<dyn Error>> {
+        if let Some(captures) = regex::Regex::new(r"X-RequestId:(.*?)\r\n")?.captures(message) {
+            Ok(captures[1].to_string())
+        } else {
+            Err("Request ID not found".into())
+        }
     }
 
     pub async fn receive(&mut self) -> Result<Vec<u8>, Box<dyn Error>> {
-        let mut buffer = Vec::new();
         while let Some(message) = self.ws.next().await {
             match message {
-                Ok(Message::Text(s)) => {
-                    info!("Text: {}", s);
-                    if let Some(header_str) = s.split("\r\n\r\n").next() {
-                        let headers = self.parse_headers(header_str);
-                        if
-                            let Some(content_length) = headers
-                                .iter()
-                                .find(|(k, _)| k == "Content-Length")
-                        {
-                            info!("Content-Length: {}", content_length.1);
-                            let content_length = content_length.1.parse::<usize>().unwrap();
-                            let body = s.split("\r\n\r\n").nth(1).unwrap();
-                            buffer.extend_from_slice(body.as_bytes());
-                            if buffer.len() >= content_length {
-                                break;
-                            }
+                Ok(Message::Binary(data)) => {
+                    let buffer = data.clone();
+                    let msg = String::from_utf8_lossy(&data);
+                    let request_id = self.extract_request_id(&msg)?;
+                    info!("Received {} bytes for request {}", buffer.len(), request_id);
+                    if msg.contains("Path:turn.start") {
+                    } else if msg.contains("Path:turn.end") {
+                        if let Some(stream) = self.streams.get_mut(&request_id) {
+                            stream.push(Some(buffer));
                         }
+                    } else if msg.contains("Path:response") {
+                        // context response, ignore
+                    } else if msg.contains("Path:audio") {
+                        info!("Received audio for request {}", request_id);
+                    } else {
+                        info!("UNKNOWN MESSAGE: {}", msg);
                     }
                 }
                 Ok(Message::Close(_)) => {
-                    info!("Connection closed by server");
+                    info!("Connection closed");
                     break;
                 }
                 Ok(_) => {}
@@ -118,8 +112,7 @@ impl MsEdgeTTS {
                 }
             }
         }
-        self.ws.close(None).await.unwrap();
-        Ok(buffer)
+        Ok(vec![])
     }
 
     fn build_ssml(&self) -> String {
