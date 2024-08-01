@@ -19,13 +19,13 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [x] Azure API
 
-- [ ] Edge API
+- [x] Edge API
 
 - [ ] i18n
 
 - [ ] ChatTTS API
 
-- [ ] GitHub Actions
+- [x] GitHub Actions
 
 - [ ] System Tray
 
