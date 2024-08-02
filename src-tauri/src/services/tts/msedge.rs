@@ -22,6 +22,27 @@ pub struct MsEdgeTTS {
     ws: WebSocketStream<MaybeTlsStream<TcpStream>>,
 }
 
+enum MessageType {
+    TurnStart,
+    TurnEnd,
+    Response,
+    Other(String),
+}
+
+impl MessageType {
+    fn from_text(text: &str) -> MessageType {
+        if text.contains("Path:turn.start") {
+            MessageType::TurnStart
+        } else if text.contains("Path:turn.end") {
+            MessageType::TurnEnd
+        } else if text.contains("Path:response") {
+            MessageType::Response
+        } else {
+            MessageType::Other(text.to_string())
+        }
+    }
+}
+
 impl MsEdgeTTS {
     pub async fn new(
         text: String,
@@ -67,32 +88,56 @@ impl MsEdgeTTS {
         self.ws.send(Message::Text(request)).await.unwrap();
     }
 
+    fn process_binary_message(&mut self, data: &Vec<u8>, stream: &mut Vec<u8>) {
+        let msg = String::from_utf8_lossy(&data);
+        if msg.contains("Path:audio") {
+            let binary_delim = b"Path:audio\r\n";
+            if
+                let Some(start_idx) = data
+                    .windows(binary_delim.len())
+                    .position(|slice| slice == binary_delim)
+            {
+                let audio_start = start_idx + binary_delim.len();
+                if audio_start < data.len() {
+                    // Ensure we don't go out of bounds
+                    stream.extend_from_slice(&data[audio_start..]);
+                }
+            }
+        }
+    }
+
+    async fn handle_text_message(&mut self, text: &str) -> Result<bool, String> {
+        match MessageType::from_text(text) {
+            MessageType::TurnStart => {
+                info!("Received turn.start");
+                Ok(true)
+            }
+            MessageType::TurnEnd => {
+                info!("Received turn.end");
+                self.ws.send(Message::Close(None)).await.unwrap();
+                Ok(false)
+            }
+            MessageType::Response => {
+                info!("Received response");
+                Ok(true)
+            }
+            MessageType::Other(msg) => {
+                debug!("Received other message: {}", msg);
+                Ok(true)
+            }
+        }
+    }
+
     pub async fn receive(&mut self) -> Result<Vec<u8>, String> {
         let mut stream = Vec::new();
         while let Some(message) = self.ws.next().await {
             match message {
                 Ok(Message::Binary(data)) => {
-                    let msg = String::from_utf8_lossy(&data);
-                    if msg.contains("Path:audio") {
-                        let binary_delim = "Path:audio\r\n";
-                        let start_idx = data
-                            .windows(binary_delim.len())
-                            .position(|w| w == binary_delim.as_bytes());
-                        let audio_data = data[start_idx.unwrap() + binary_delim.len()..].to_vec();
-                        stream.push(audio_data);
-                    }
+                    self.process_binary_message(&data, &mut stream);
                 }
                 Ok(Message::Text(text)) => {
-                    if text.contains("Path:turn.start") {
-                        info!("Received turn.start");
-                    } else if text.contains("Path:turn.end") {
-                        info!("Received turn.end");
-                        self.ws.send(Message::Close(None)).await.unwrap();
+                    if !self.handle_text_message(&text).await? {
                         break;
-                    } else if text.contains("Path:response") {
-                        info!("Received response");
-                    } else {
-                        debug!("Received text: {}", text);
                     }
                 }
                 Ok(Message::Close(_)) => {
@@ -107,7 +152,7 @@ impl MsEdgeTTS {
                 }
             }
         }
-        Ok(stream.concat())
+        Ok(stream)
     }
 
     fn build_ssml(&self) -> String {

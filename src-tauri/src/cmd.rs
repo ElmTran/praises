@@ -11,7 +11,6 @@ pub fn get_windows_devices() -> Result<Vec<windows::Device>, String> {
 }
 
 #[tauri::command]
-// TODO: encapsulate the parameters in a struct including service name
 pub async fn convert(
     service: &str,
     text: &str,
