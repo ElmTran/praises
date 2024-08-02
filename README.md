@@ -1,9 +1,7 @@
 <h3 align="center">Praises</h3>
 
   <p align="center">
-    Praises is a text-to-speech tool that can help you read text easily. Currently, it supports Azure API. More APIs will be supported in the future. The project is built with Vue 3, UnoCSS, Pinia, Element Plus, and Tauri.
-    <br />
-    <a href="https://github.com/ElmTran/praises"><strong>Explore the docs »</strong></a>
+    Praises is a text-to-speech tool that can help you read text easily.
     <br />
     <br />
     <a href="https://github.com/ElmTran/praises/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
