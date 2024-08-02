@@ -27,7 +27,9 @@ export const useTtsStore = defineStore("tts", () => {
         console.error(`convert error: ${resp}`);
         return;
       }
-      audioUrl.value = URL.createObjectURL(new Blob([Buffer.from(resp)], { type: "audio/mp3" }));
+      audioUrl.value = URL.createObjectURL(
+        new Blob([Buffer.from(resp)], { type: "audio/mp3" }),
+      );
     } catch (error) {
       console.error(`Failed to convert: ${error}`);
     }
