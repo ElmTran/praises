@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
-import WindowsForm from "./components/WindowsForm.vue";
 import FormButton from "./components/FormButton.vue";
 import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
@@ -9,8 +8,8 @@ import { storeToRefs } from "pinia";
 const ttsStore = useTtsStore();
 const { state } = storeToRefs(ttsStore);
 const services = reactive([
-  { value: "azure", label: "Azure" },
   { value: "msedge", label: "Microsoft Edge" },
+  { value: "azure", label: "Azure" },
   // { value: "native", label: "Native" },
   // { value: "tiktok", label: "TikTok" },
   // { value: "windows", label: "Windows" },
@@ -20,7 +19,6 @@ const services = reactive([
 const forms: { [key: string]: typeof AzureForm } = {
   azure: AzureForm,
   msedge: AzureForm, // AzureForm is used for both Azure and Edge
-  windows: WindowsForm,
 };
 </script>
 <template>
