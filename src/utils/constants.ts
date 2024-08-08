@@ -1,3 +1,4 @@
+import { $t } from "../locales";
 export type SpeakerOption = {
   value: string;
   label: string;
@@ -8,9 +9,9 @@ export type SpeakerOption = {
 export const speakerOptions: SpeakerOption[] = [
   {
     value: "en-US-AriaNeural",
-    label: "Aria",
+    label: $t("tts.form.options.speaker.aria"),
     styles: [
-      { value: "chat", label: "Chat" },
+      { value: "chat", label: $t("tts.form.options.style.chat") },
       { value: "angry", label: "Angry" },
       { value: "cheerful", label: "Cheerful" },
       { value: "customerservice", label: "Customer Service" },
@@ -162,17 +163,17 @@ type LanguageOption = {
 export const languageOptions: LanguageOption[] = [
   {
     value: "en-US",
-    label: "English",
+    label: $t("tts.form.options.language.en"),
     speakers: speakerOptions.filter((s) => s.value.startsWith("en-US")),
   },
   {
     value: "zh-CN",
-    label: "Chinese",
+    label: $t("tts.form.options.language.zh"),
     speakers: speakerOptions.filter((s) => s.value.startsWith("zh-CN")),
   },
   {
     value: "ja-JP",
-    label: "Japanese",
+    label: $t("tts.form.options.language.ja"),
     speakers: speakerOptions.filter((s) => s.value.startsWith("ja-JP")),
   },
 ];

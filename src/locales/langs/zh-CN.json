@@ -1,0 +1,34 @@
+{
+    "tts": {
+        "form": {
+            "language": "语言",
+            "speaker": "语音",
+            "style": "风格",
+            "role": "角色",
+            "rate": "速度",
+            "pitch": "音调",
+            "save": "保存",
+            "convert": "转换",
+            "options": {
+                "language": {
+                    "en": "英语",
+                    "zh": "中文",
+                    "ja": "日语"
+                },
+                "speaker": {
+                    "aria": "Aria"
+                },
+                "style": {
+                    "chat": "聊天"
+                }
+            },
+            "placeholder": {
+                "language": "请选择语言",
+                "speaker": "请选择语音",
+                "style": "请选择风格",
+                "role": "请选择角色",
+                "template": "请选择模板"
+            }
+        }
+    }
+}

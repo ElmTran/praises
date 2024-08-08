@@ -4,6 +4,7 @@ import { languageOptions, SpeakerOption } from "../../../utils/constants";
 import { useTtsStore } from "../../../store/tts";
 import { useSettingStore } from "../../../store/setting";
 import { storeToRefs } from "pinia";
+import { $t } from "../../../locales";
 
 type OptionType = { value: string; label: string };
 
@@ -53,12 +54,14 @@ const save = () => {
     <el-form>
       <el-form-item>
         <template #label>
-          <span class="item-label">Language</span>
+          <span class="item-label">
+            {{ $t("tts.form.language") }}
+          </span>
         </template>
         <el-select
           v-model="state.language"
           class="form-item"
-          placeholder="please select"
+          :placeholder="$t('tts.form.placeholder.language')"
           :popper-append-to-body="false"
           @change="useSpeakerOptions(state.language)"
         >
@@ -72,12 +75,14 @@ const save = () => {
       </el-form-item>
       <el-form-item>
         <template #label>
-          <span class="item-label">Speaker</span>
+          <span class="item-label">
+            {{ $t("tts.form.speaker") }}
+          </span>
         </template>
         <el-select
           v-model="state.speaker"
           class="form-item"
-          placeholder="please select"
+          :placeholder="$t('tts.form.placeholder.speaker')"
           @change="useStyleAndRoleOptions(state.speaker)"
         >
           <el-option
@@ -90,11 +95,13 @@ const save = () => {
       </el-form-item>
       <el-form-item v-if="styleOptions.length">
         <template #label>
-          <span class="item-label">Style</span>
+          <span class="item-label">
+            {{ $t("tts.form.style") }}
+          </span>
         </template>
         <el-select
           v-model="state.style"
-          placeholder="please select"
+          :placeholder="$t('tts.form.placeholder.style')"
           class="form-item"
         >
           <el-option
@@ -107,11 +114,13 @@ const save = () => {
       </el-form-item>
       <el-form-item v-if="roleOptions.length">
         <template #label>
-          <span class="item-label">Role</span>
+          <span class="item-label">
+            {{ $t("tts.form.role") }}
+          </span>
         </template>
         <el-select
           v-model="state.role"
-          placeholder="please select"
+          :placeholder="$t('tts.form.placeholder.role')"
           class="form-item"
         >
           <el-option
@@ -124,7 +133,9 @@ const save = () => {
       </el-form-item>
       <el-form-item>
         <template #label>
-          <span class="item-label">Rate</span>
+          <span class="item-label">
+            {{ $t("tts.form.rate") }}
+          </span>
         </template>
         <el-slider
           v-model="state.rate"
@@ -136,7 +147,9 @@ const save = () => {
       </el-form-item>
       <el-form-item>
         <template #label>
-          <span class="item-label">Pitch</span>
+          <span class="item-label">
+            {{ $t("tts.form.pitch") }}
+          </span>
         </template>
         <el-slider
           v-model="state.pitch"
@@ -151,7 +164,7 @@ const save = () => {
       <span>
         <el-select
           v-model="template"
-          placeholder="Please enter a template name"
+          :placeholder="$t('tts.form.placeholder.template')"
           style="width: 140px"
           clearable
           filterable
@@ -174,7 +187,7 @@ const save = () => {
             />
           </svg>
         </span>
-        <p class="btnLabel">Save</p>
+        <p class="btnLabel">{{ $t("tts.form.save") }}</p>
       </button>
     </div>
   </div>
