@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTtsStore } from "../../../store/tts";
+import { $t } from "../../../locales";
 const ttsStore = useTtsStore();
 
 const convert = () => {
@@ -10,7 +11,7 @@ const convert = () => {
 <template>
   <div class="bottom-container">
     <button class="button" @click="convert">
-      <span class="button-content">Convert</span>
+      <span class="button-content">{{ $t("tts.form.convert") }}</span>
     </button>
   </div>
 </template>

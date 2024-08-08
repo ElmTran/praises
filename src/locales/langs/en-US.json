@@ -1,0 +1,21 @@
+{
+    "tts": {
+        "form": {
+            "save": "Save",
+            "convert": "Convert",
+            "options": {
+                "language": {
+                    "en": "English",
+                    "zh": "Chinese",
+                    "ja": "Japanese"
+                },
+                "speaker": {
+                    "aria": "Aria"
+                },
+                "style": {
+                    "chat": "Chat"
+                }
+            }
+        }
+    }
+}

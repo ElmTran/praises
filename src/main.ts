@@ -8,9 +8,12 @@ import router from "./router";
 import { initStore } from "./store/config";
 import { createPinia } from "pinia";
 import { useSettingStore } from "./store/setting";
+import { setupI18n } from "./locales";
 
 const pinia = createPinia();
 const app = createApp(App);
+
+await setupI18n(app);
 
 app.use(router);
 app.use(ElementPlus);
