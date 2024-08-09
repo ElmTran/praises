@@ -1,7 +1,9 @@
 import { reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { configStore } from "./config.ts";
+import { setupI18n } from "../locales/index.ts";
 
+type SupportedLanguagesType = "en-US" | "zh-CN";
 type TemplateOption = {
   value: {
     language: string;
@@ -21,8 +23,7 @@ export const useSettingStore = defineStore("setting", () => {
   });
   const autoplay = ref();
   const ttsTemplate = ref<TemplateOption[]>([]);
-  const locale = ref("en");
-  const fallbackLocale = ref("en");
+  const locale = ref<SupportedLanguagesType>("en-US");
 
   async function load() {
     const endpoint: string | null =
@@ -32,9 +33,8 @@ export const useSettingStore = defineStore("setting", () => {
       (await configStore.value.get("azure.subscription")) || "";
     autoplay.value = await configStore.value.get("tts.autoplay");
     ttsTemplate.value = (await configStore.value.get("tts.template")) || [];
-    locale.value = (await configStore.value.get("locale")) || "en";
-    fallbackLocale.value =
-      (await configStore.value.get("fallbackLocale")) || "en";
+    locale.value = (await configStore.value.get("locale")) || "en-US";
+    setupI18n({ defaultLocale: locale.value });
   }
 
   async function setAzureEndpoint() {
@@ -63,8 +63,8 @@ export const useSettingStore = defineStore("setting", () => {
 
   async function setlocale() {
     await configStore.value.set("locale", locale.value);
-    await configStore.value.set("fallbackLocale", fallbackLocale.value);
     await configStore.value.save();
+    setupI18n({ defaultLocale: locale.value });
   }
 
   return {
@@ -72,7 +72,6 @@ export const useSettingStore = defineStore("setting", () => {
     autoplay,
     ttsTemplate,
     locale,
-    fallbackLocale,
     load,
     setAzureEndpoint,
     setAzureSubscription,
