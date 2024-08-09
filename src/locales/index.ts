@@ -4,14 +4,11 @@ import type {
   LocaleSetupOptions,
   SupportedLanguagesType,
 } from "./typing";
-
-import type { App } from "vue";
-
 import { i18n, loadI18nMessages, loadLocalesMap } from "./i18n";
 
-const $t = i18n.global.t;
-
 let loadMessages: LoadMessageFn;
+
+const $t = i18n.global.t;
 
 async function loadLocaleMessages(lang: SupportedLanguagesType) {
   const mergeMessage = await loadMessages(lang);
@@ -19,11 +16,10 @@ async function loadLocaleMessages(lang: SupportedLanguagesType) {
   i18n.global.mergeLocaleMessage(lang, mergeMessage);
 }
 
-async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
-  const { defaultLocale = "zh-CN" } = options;
+async function setupI18n(options: LocaleSetupOptions = {}) {
+  const { defaultLocale = "en-US" } = options;
   // app可以自行扩展一些第三方库和组件库的国际化
   loadMessages = options.loadMessages || (async () => ({}));
-  app.use(i18n);
   await loadLocaleMessages(defaultLocale);
 
   // 在控制台打印警告
