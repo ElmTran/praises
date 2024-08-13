@@ -12,39 +12,29 @@ const languages = [
 </script>
 <template>
   <div class="setting-box">
-    <el-form>
-      <el-form-item>
-        <template #label>
-          <span class="form-item__label">{{
-            $t("setting.form.language")
-          }}</span>
-        </template>
-        <el-select
-          v-model="locale"
-          class="form-item"
-          @change="settingStore.setlocale"
-        >
-          <el-option
-            v-for="item in languages"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <template #label>
-          <span class="form-item__label">{{
-            $t("setting.form.autoplay")
-          }}</span>
-        </template>
-        <el-switch
-          v-model="autoplay"
-          class="form-item"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #c8c8c8"
-          @change="settingStore.setAutoplay"
+    <div class="setting-item">
+      <span class="item__label">{{ $t("setting.form.language") }}</span>
+      <el-select
+        v-model="locale"
+        class="item__input"
+        @change="settingStore.setlocale"
+      >
+        <el-option
+          v-for="item in languages"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
         />
-      </el-form-item>
-    </el-form>
+      </el-select>
+    </div>
+    <div class="setting-item">
+      <span class="item__label">{{ $t("setting.form.autoplay") }}</span>
+      <el-switch
+        v-model="autoplay"
+        class="item__input"
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #c8c8c8"
+        @change="settingStore.setAutoplay"
+      />
+    </div>
   </div>
 </template>
