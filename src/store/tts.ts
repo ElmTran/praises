@@ -8,7 +8,7 @@ export const useTtsStore = defineStore("tts", () => {
   const state = reactive({
     service: "msedge",
     text: "",
-    language: "",
+    language: "en-US",
     speaker: "",
     style: "",
     role: "",
