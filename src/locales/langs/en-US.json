@@ -16,7 +16,13 @@
           "ja": "Japanese"
         },
         "speaker": {
-          "aria": "Aria"
+          "aria": "Aria",
+          "davis": "Davis",
+          "guy": "Guy",
+          "xiaoxiao": "Xiaoxiao",
+          "xiaomo": "Xiaomo",
+          "yunye": "Yunye",
+          "nanami": "Nanami"
         },
         "style": {
           "chat": "Chat",

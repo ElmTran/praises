@@ -10,15 +10,16 @@ type OptionType = { value: string; label: string };
 
 const ttsStore = useTtsStore();
 const settingStore = useSettingStore();
-const { state } = storeToRefs(ttsStore);
-const { ttsTemplate } = storeToRefs(settingStore);
 const speakerOptions = ref<SpeakerOption[]>([]);
 const styleOptions = ref<OptionType[]>([]);
 const roleOptions = ref<OptionType[]>([]);
 const template = ref("");
 
+const { state } = storeToRefs(ttsStore);
+const { ttsTemplate } = storeToRefs(settingStore);
+
 const useSpeakerOptions = (value: string) => {
-  const language = languageOptions.find((item) => item.value === value);
+  const language = languageOptions.value.find((item) => item.value === value);
   speakerOptions.value = language?.speakers || [];
   state.value.speaker = speakerOptions.value[0].value;
   useStyleAndRoleOptions(state.value.speaker);
