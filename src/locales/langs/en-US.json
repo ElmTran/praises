@@ -1,57 +1,83 @@
 {
-    "tts": {
-        "form": {
-            "language": "Language",
-            "speaker": "Speaker",
-            "style": "Style",
-            "role": "Role",
-            "rate": "Rate",
-            "pitch": "Pitch",
-            "save": "Save",
-            "convert": "Convert",
-            "options": {
-                "language": {
-                    "en": "English",
-                    "zh": "Chinese",
-                    "ja": "Japanese"
-                },
-                "speaker": {
-                    "aria": "Aria"
-                },
-                "style": {
-                    "chat": "Chat",
-                    "angry": "Angry",
-                    "cheerful": "Cheerful",
-                    "customerservice": "Customer Service",
-                    "empathetic": "Empathetic",
-                    "excited": "Excited",
-                    "friendly": "Friendly",
-                    "hopeful": "Hopeful",
-                    "narrationProfessional": "Narration Professional",
-                    "newscastCasual": "Newscast Casual",
-                    "newscastFormal": "Newscast Formal",
-                    "sad": "Sad",
-                    "shouting": "Shouting",
-                    "terrified": "Terrified",
-                    "unfriendly": "Unfriendly",
-                    "whispering": "Whispering"
-                }
-            },
-            "placeholder": {
-                "language": "Please select language",
-                "speaker": "Please select speaker",
-                "style": "Please select style",
-                "role": "Please select role",
-                "template": "Please select template"
-            }
+  "tts": {
+    "form": {
+      "language": "Language",
+      "speaker": "Speaker",
+      "style": "Style",
+      "role": "Role",
+      "rate": "Rate",
+      "pitch": "Pitch",
+      "save": "Save",
+      "convert": "Convert",
+      "options": {
+        "language": {
+          "en": "English",
+          "zh": "Chinese",
+          "ja": "Japanese"
+        },
+        "speaker": {
+          "aria": "Aria"
+        },
+        "style": {
+          "chat": "Chat",
+          "angry": "Angry",
+          "cheerful": "Cheerful",
+          "customerservice": "Customer Service",
+          "empathetic": "Empathetic",
+          "excited": "Excited",
+          "friendly": "Friendly",
+          "hopeful": "Hopeful",
+          "narrationProfessional": "Narration Professional",
+          "newscastCasual": "Newscast Casual",
+          "newscastFormal": "Newscast Formal",
+          "sad": "Sad",
+          "shouting": "Shouting",
+          "terrified": "Terrified",
+          "unfriendly": "Unfriendly",
+          "whispering": "Whispering",
+          "affectionate": "Affectionate",
+          "assistant": "Assistant",
+          "calm": "Calm",
+          "chatCasual": "Chat Casual",
+          "disgruntled": "Disgruntled",
+          "fearful": "Fearful",
+          "gentle": "Gentle",
+          "lyrical": "Lyrical",
+          "newscast": "NewCast",
+          "poetryReading": "Poetry Reading",
+          "serious": "Serious",
+          "sorry": "Sorry",
+          "whisper": "Whisper",
+          "depressed": "Depressed",
+          "embarrassed": "Embarrassed",
+          "envious": "Envious"
+        },
+        "role": {
+          "boy": "Boy",
+          "girl": "Girl",
+          "olderAdultFemale": "Older Adult Female",
+          "olderAdultMale": "Older Adult Male",
+          "seniorFemale": "Senior Female",
+          "seniorMale": "Senior Male",
+          "youngAdultFemale": "Young Adult Female",
+          "youngAdultMale": "Young Adult Male"
         }
-    },
-    "setting": {
-        "form": {
-            "region": "Region",
-            "subscriptionKey": "Subscription Key",
-            "language": "Language",
-            "autoplay": "Autoplay"
-        }
+      },
+      "placeholder": {
+        "language": "Please select language",
+        "speaker": "Please select speaker",
+        "style": "Please select style",
+        "role": "Please select role",
+        "template": "Please select template"
+      }
     }
+  },
+  "setting": {
+    "form": {
+      "region": "Region",
+      "subscriptionKey": "Subscription Key",
+      "language": "Language",
+      "autoplay": "Autoplay"
+    }
+  }
 }

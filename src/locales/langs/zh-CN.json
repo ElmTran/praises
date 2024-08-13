@@ -34,7 +34,23 @@
                     "shouting": "大声",
                     "terrified": "恐惧",
                     "unfriendly": "不友好",
-                    "whispering": "低语"
+                    "whispering": "低语",
+                    "affectionate": "深情",
+                    "assistant": "申援",
+                    "calm": "冷静",
+                    "chatCasual": "聊天-随意",
+                    "disgruntled": "不满",
+                    "fearful": "害怕",
+                    "gentle": "温和",
+                    "lyrical": "抒情",
+                    "newscast": "新闻播报",
+                    "poetryReading": "诗歌朗读",
+                    "serious": "严肃",
+                    "sorry": "歉意",
+                    "whisper": "低语",
+                    "depressed": "沮丧",
+                    "embarrassed": "尴尬",
+                    "envious": "嫉妒"
                 }
             },
             "placeholder": {
