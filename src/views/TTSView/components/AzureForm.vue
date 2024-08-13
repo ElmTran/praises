@@ -49,6 +49,9 @@ const save = () => {
     name: template.value,
   });
 };
+
+// Initialize
+useSpeakerOptions(state.value.language);
 </script>
 <template>
   <div class="form-container" :inline="true" label-width="140px">
