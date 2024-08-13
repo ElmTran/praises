@@ -4,10 +4,10 @@ import CommonSetting from "./components/Common.vue";
 </script>
 <template>
   <el-main class="main">
-    <el-container class="setting-container">
+    <div class="setting-container">
       <AzureSetting />
       <CommonSetting />
-    </el-container>
+    </div>
   </el-main>
 </template>
 <style scoped lang="scss">

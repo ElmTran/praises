@@ -101,24 +101,34 @@ h1 {
 
 .setting-container {
   display: flex;
-  justify-content: center;
-  .el-form {
-    padding: 2em 1em;
-    .form-item__label {
-      margin-right: 5px;
-      color: rgba(244, 91, 91, 0.8);
-    }
-    .form-item {
-      width: 200px;
-      margin-left: auto;
-    }
-    .el-input__wrapper {
-      background: transparent;
-      border: none;
-      border-radius: 0.4em;
-      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-      .el-input__inner {
-        color: rgba(255, 255, 255, 0.95);
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.2em;
+
+  .setting-box {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.6em 0;
+
+      .item__label {
+        color: rgba(244, 91, 91, 0.8);
+      }
+      .item__input {
+        width: 200px;
+      }
+      .el-input__wrapper {
+        background: transparent;
+        border: none;
+        border-radius: 0.4em;
+        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+        .el-input__inner {
+          color: rgba(255, 255, 255, 0.95);
+        }
       }
     }
   }
