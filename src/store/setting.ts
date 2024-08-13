@@ -1,7 +1,7 @@
 import { reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { configStore } from "./config.ts";
-import { setupI18n } from "../locales/index.ts";
+import { setupI18n } from "../locales";
 
 type SupportedLanguagesType = "en-US" | "zh-CN";
 type TemplateOption = {
