@@ -38,6 +38,11 @@ impl AppBuidler {
                 Ok(())
             });
 
+        #[cfg(not(target_os = "macos"))]
+        let builder = builder
+            .system_tray(crate::tray::build())
+            .on_system_tray_event(crate::tray::on_event);
+
         let app = builder.build(tauri::generate_context!())?;
         Ok(Self { app })
     }
