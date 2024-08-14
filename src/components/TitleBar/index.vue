@@ -2,7 +2,6 @@
 import { appWindow } from "@tauri-apps/api/window";
 import { ref } from "vue";
 const maximized = ref(false);
-// listen for the window event
 window.addEventListener("resize", async () => {
   maximized.value = await appWindow.isMaximized();
 });
@@ -27,7 +26,7 @@ window.addEventListener("resize", async () => {
     <button
       id="titlebar-close"
       class="titlebar-button"
-      @click="appWindow.close()"
+      @click="appWindow.hide()"
     >
       <i-ep-close />
     </button>
