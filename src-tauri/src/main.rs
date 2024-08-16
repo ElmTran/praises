@@ -8,6 +8,8 @@ mod config;
 mod error;
 mod services;
 mod window;
+mod constants;
+mod event;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

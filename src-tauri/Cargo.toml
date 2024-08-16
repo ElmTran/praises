@@ -45,6 +45,8 @@ tokio-tungstenite = { version = "0.23.1", features = ["native-tls"] }
 futures-util = "0.3.30"
 url = "2.5.2"
 regex = "1.10.5"
+strum_macros = "0.26.4"
+strum = "0.26.3"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

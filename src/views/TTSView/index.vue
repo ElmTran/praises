@@ -4,6 +4,8 @@ import AzureForm from "./components/AzureForm.vue";
 import FormButton from "./components/FormButton.vue";
 import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
+import { listen } from "@tauri-apps/api/event";
+import router from "../../router";
 
 const ttsStore = useTtsStore();
 const { state } = storeToRefs(ttsStore);
@@ -20,6 +22,10 @@ const forms: { [key: string]: typeof AzureForm } = {
   azure: AzureForm,
   msedge: AzureForm, // AzureForm is used for both Azure and Edge
 };
+
+listen("Navigate", ({ payload }) => {
+  router.push(payload as string);
+});
 </script>
 <template>
   <el-main class="main">

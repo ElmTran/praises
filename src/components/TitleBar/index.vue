@@ -2,9 +2,6 @@
 import { appWindow } from "@tauri-apps/api/window";
 import { ref } from "vue";
 const maximized = ref(false);
-window.addEventListener("resize", async () => {
-  maximized.value = await appWindow.isMaximized();
-});
 </script>
 
 <template>

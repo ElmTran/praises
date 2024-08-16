@@ -9,7 +9,6 @@ import { initStore } from "./store/config";
 import { createPinia } from "pinia";
 import { useSettingStore } from "./store/setting";
 import { i18n } from "./locales";
-import { registerEvents } from "./event";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -22,6 +21,5 @@ app.use(i18n);
 (async () => {
   initStore();
   useSettingStore().load();
-  registerEvents();
   app.mount("#app");
 })();
