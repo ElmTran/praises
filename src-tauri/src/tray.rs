@@ -1,16 +1,18 @@
-use tauri::{ AppHandle, Manager, SystemTrayEvent };
+use tauri::{ AppHandle, SystemTrayEvent };
 use crate::window::show_main_window;
+use crate::window::navigate_to_tab;
+use crate::constants::TabLocation;
 
 pub(crate) fn build() -> tauri::SystemTray {
     use tauri::{ CustomMenuItem, SystemTray, SystemTrayMenu, SystemTrayMenuItem };
 
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let show = CustomMenuItem::new("show".to_string(), "Show");
-    let settings = CustomMenuItem::new("settings".to_string(), "Settings");
+    let setting = CustomMenuItem::new("setting".to_string(), "Setting");
 
     let menu = SystemTrayMenu::new()
         .add_item(show)
-        .add_item(settings)
+        .add_item(setting)
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(quit);
 
@@ -18,8 +20,7 @@ pub(crate) fn build() -> tauri::SystemTray {
 }
 
 pub(crate) fn on_event(app: &AppHandle, event: SystemTrayEvent) {
-    use SystemTrayEvent::*;
-
+    use tauri::SystemTrayEvent::{ MenuItemClick, DoubleClick };
     match event {
         MenuItemClick { id, .. } => {
             match id.as_str() {
@@ -29,9 +30,8 @@ pub(crate) fn on_event(app: &AppHandle, event: SystemTrayEvent) {
                 "quit" => {
                     app.exit(0);
                 }
-                "settings" => {
-                    show_main_window(app);
-                    app.emit_all("open-settings", ()).unwrap();
+                "setting" => {
+                    navigate_to_tab(app, &TabLocation::Setting);
                 }
                 _ => {}
             }

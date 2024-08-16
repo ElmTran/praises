@@ -6,7 +6,7 @@ use log::LevelFilter;
 use env_logger;
 #[cfg(any(target_os = "macos", target_os = "windows"))]
 use window_shadows::set_shadow;
-use tauri::Manager;
+use tauri::{ RunEvent, Manager };
 
 pub static HANDLE: OnceCell<tauri::AppHandle> = OnceCell::new(); // define a static variable to store the app handle (singleton)
 
@@ -48,9 +48,19 @@ impl AppBuidler {
     }
 
     pub fn run(self) {
-        self.app.run(|_, event| {
-            if let tauri::RunEvent::ExitRequested { api, .. } = event {
-                api.prevent_exit();
+        self.app.run(|app, event| {
+            match event {
+                RunEvent::Exit => {}
+                RunEvent::ExitRequested { .. } => {}
+                RunEvent::WindowEvent { .. } => {}
+                RunEvent::Ready =>
+                    match app.get_window("main") {
+                        None => {}
+                        Some(win) => {
+                            let _ = win.show();
+                        }
+                    }
+                _ => {}
             }
         });
     }
