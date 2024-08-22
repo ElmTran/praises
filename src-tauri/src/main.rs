@@ -10,6 +10,7 @@ mod services;
 mod window;
 mod constants;
 mod event;
+mod hotkeys;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

@@ -35,7 +35,6 @@ export const useTtsStore = defineStore("tts", () => {
     }
   }
   async function setValue(values: Record<string, any>) {
-    console.log(values);
     Object.assign(state, values);
   }
   return { audioUrl, state, convert, setValue };
