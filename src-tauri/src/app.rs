@@ -1,5 +1,6 @@
 use crate::config;
 use crate::cmd::*;
+use crate::hotkeys::register_shortcut;
 use once_cell::sync::OnceCell;
 use log::info;
 use log::LevelFilter;
@@ -35,6 +36,7 @@ impl AppBuidler {
                 }
                 let window = app.get_window("main").unwrap();
                 set_shadow(&window, true).unwrap();
+                register_shortcut("all").unwrap();
                 Ok(())
             });
 

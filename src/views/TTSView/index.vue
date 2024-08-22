@@ -26,6 +26,11 @@ const forms: { [key: string]: typeof AzureForm } = {
 listen("Navigate", ({ payload }) => {
   router.push(payload as string);
 });
+
+listen("PlayAudio", ({ payload }) => {
+  ttsStore.state.text = payload as string;
+  ttsStore.convert();
+});
 </script>
 <template>
   <el-main class="main">
