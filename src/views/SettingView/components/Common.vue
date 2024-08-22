@@ -9,6 +9,20 @@ const languages = [
   { label: "English", value: "en-US" },
   { label: "中文", value: "zh-CN" },
 ];
+const keysPressed: string[] = [];
+const handleKeyDown = (e: KeyboardEvent) => {
+  e.preventDefault();
+  if (!keysPressed.includes(e.key)) {
+    keysPressed.push(e.key);
+  }
+  settingStore.listeningKey = keysPressed.join("+");
+  settingStore.setListeningKey();
+};
+const clearKeys = () => {
+  setTimeout(() => {
+    keysPressed.length = 0;
+  }, 1000);
+};
 </script>
 <template>
   <div class="setting-box">
@@ -34,6 +48,15 @@ const languages = [
         class="item__input"
         style="--el-switch-on-color: #13ce66; --el-switch-off-color: #c8c8c8"
         @change="settingStore.setAutoplay"
+      />
+    </div>
+    <div class="setting-item">
+      <span class="item__label">{{ $t("setting.form.listeningKey") }}</span>
+      <el-input
+        v-model="settingStore.listeningKey"
+        class="item__input"
+        @keydown="handleKeyDown"
+        @keyup="clearKeys"
       />
     </div>
   </div>
