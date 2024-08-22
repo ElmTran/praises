@@ -1,89 +1,90 @@
 {
-    "tts": {
-        "form": {
-            "language": "语言",
-            "speaker": "语音",
-            "style": "风格",
-            "role": "角色",
-            "rate": "速度",
-            "pitch": "音调",
-            "save": "保存",
-            "convert": "转换",
-            "options": {
-                "language": {
-                    "en": "英语",
-                    "zh": "中文",
-                    "ja": "日语"
-                },
-                "speaker": {
-                    "aria": "Aria",
-                    "davis": "Davis",
-                    "guy": "Guy",
-                    "xiaoxiao": "晓晓",
-                    "xiaomo": "筱莫",
-                    "yunye": "云业",
-                    "nanami": "七海"
-                },
-                "style": {
-                    "chat": "聊天",
-                    "angry": "愤怒",
-                    "cheerful": "愉快",
-                    "customerservice": "客服",
-                    "empathetic": "同情",
-                    "excited": "兴奋",
-                    "friendly": "友好",
-                    "hopeful": "希望",
-                    "narrationProfessional": "专业叙述",
-                    "newscastCasual": "新闻播报-随意",
-                    "newscastFormal": "新闻播报-正式",
-                    "sad": "悲伤",
-                    "shouting": "大声",
-                    "terrified": "恐惧",
-                    "unfriendly": "不友好",
-                    "whispering": "低语",
-                    "affectionate": "深情",
-                    "assistant": "申援",
-                    "calm": "冷静",
-                    "chatCasual": "聊天-随意",
-                    "disgruntled": "不满",
-                    "fearful": "害怕",
-                    "gentle": "温和",
-                    "lyrical": "抒情",
-                    "newscast": "新闻播报",
-                    "poetryReading": "诗歌朗读",
-                    "serious": "严肃",
-                    "sorry": "歉意",
-                    "whisper": "低语",
-                    "depressed": "沮丧",
-                    "embarrassed": "尴尬",
-                    "envious": "嫉妒"
-                },
-                "role": {
-                    "boy": "男孩",
-                    "girl": "女孩",
-                    "olderAdultFemale": "老年女性",
-                    "olderAdultMale": "老年男性",
-                    "seniorFemale": "老太太",
-                    "seniorMale": "老先生",
-                    "youngAdultFemale": "年轻女性",
-                    "youngAdultMale": "年轻男性"
-                }
-            },
-            "placeholder": {
-                "language": "请选择语言",
-                "speaker": "请选择语音",
-                "style": "请选择风格",
-                "role": "请选择角色",
-                "template": "请选择模板"
-            }
+  "tts": {
+    "form": {
+      "language": "语言",
+      "speaker": "语音",
+      "style": "风格",
+      "role": "角色",
+      "rate": "速度",
+      "pitch": "音调",
+      "save": "保存",
+      "convert": "转换",
+      "options": {
+        "language": {
+          "en": "英语",
+          "zh": "中文",
+          "ja": "日语"
+        },
+        "speaker": {
+          "aria": "Aria",
+          "davis": "Davis",
+          "guy": "Guy",
+          "xiaoxiao": "晓晓",
+          "xiaomo": "筱莫",
+          "yunye": "云业",
+          "nanami": "七海"
+        },
+        "style": {
+          "chat": "聊天",
+          "angry": "愤怒",
+          "cheerful": "愉快",
+          "customerservice": "客服",
+          "empathetic": "同情",
+          "excited": "兴奋",
+          "friendly": "友好",
+          "hopeful": "希望",
+          "narrationProfessional": "专业叙述",
+          "newscastCasual": "新闻播报-随意",
+          "newscastFormal": "新闻播报-正式",
+          "sad": "悲伤",
+          "shouting": "大声",
+          "terrified": "恐惧",
+          "unfriendly": "不友好",
+          "whispering": "低语",
+          "affectionate": "深情",
+          "assistant": "申援",
+          "calm": "冷静",
+          "chatCasual": "聊天-随意",
+          "disgruntled": "不满",
+          "fearful": "害怕",
+          "gentle": "温和",
+          "lyrical": "抒情",
+          "newscast": "新闻播报",
+          "poetryReading": "诗歌朗读",
+          "serious": "严肃",
+          "sorry": "歉意",
+          "whisper": "低语",
+          "depressed": "沮丧",
+          "embarrassed": "尴尬",
+          "envious": "嫉妒"
+        },
+        "role": {
+          "boy": "男孩",
+          "girl": "女孩",
+          "olderAdultFemale": "老年女性",
+          "olderAdultMale": "老年男性",
+          "seniorFemale": "老太太",
+          "seniorMale": "老先生",
+          "youngAdultFemale": "年轻女性",
+          "youngAdultMale": "年轻男性"
         }
-    },
-    "setting": {
-        "form": {
-            "region": "区域",
-            "subscriptionKey": "订阅密钥",
-            "language": "语言",
-            "autoplay": "自动播放"
-        }
+      },
+      "placeholder": {
+        "language": "请选择语言",
+        "speaker": "请选择语音",
+        "style": "请选择风格",
+        "role": "请选择角色",
+        "template": "请选择模板"
+      }
     }
+  },
+  "setting": {
+    "form": {
+      "region": "区域",
+      "subscriptionKey": "订阅密钥",
+      "language": "语言",
+      "autoplay": "自动播放",
+      "listeningKey": "划词发音"
+    }
+  }
 }

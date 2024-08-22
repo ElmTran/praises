@@ -83,7 +83,8 @@
       "region": "Region",
       "subscriptionKey": "Subscription Key",
       "language": "Language",
-      "autoplay": "Autoplay"
+      "autoplay": "Autoplay",
+      "listeningKey": "Listening Shortcut"
     }
   }
 }

@@ -46,7 +46,7 @@ fn listen_to_selection() {
 pub fn register_shortcut(shortcut: &str) -> Result<(), String> {
     let app_handle = HANDLE.get().unwrap();
     match shortcut {
-        "all" => register(app_handle, "hotkey_listen_to_selection", listen_to_selection, "Alt+T")?,
+        "all" => register(app_handle, "hotkey_listen_to_selection", listen_to_selection, "")?,
         _ => {}
     }
     Ok(())

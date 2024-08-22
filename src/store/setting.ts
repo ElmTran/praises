@@ -24,6 +24,7 @@ export const useSettingStore = defineStore("setting", () => {
   const autoplay = ref();
   const ttsTemplate = ref<TemplateOption[]>([]);
   const locale = ref<SupportedLanguagesType>("en-US");
+  const listeningKey = ref();
 
   async function load() {
     const endpoint: string | null =
@@ -35,6 +36,8 @@ export const useSettingStore = defineStore("setting", () => {
     ttsTemplate.value = (await configStore.value.get("tts.template")) || [];
     locale.value = (await configStore.value.get("locale")) || "en-US";
     setupI18n({ defaultLocale: locale.value });
+    listeningKey.value =
+      (await configStore.value.get("hotkey_listen_to_selection")) || "";
   }
 
   async function setAzureEndpoint() {
@@ -67,16 +70,26 @@ export const useSettingStore = defineStore("setting", () => {
     setupI18n({ defaultLocale: locale.value });
   }
 
+  async function setListeningKey() {
+    await configStore.value.set(
+      "hotkey_listen_to_selection",
+      listeningKey.value,
+    );
+    await configStore.value.save();
+  }
+
   return {
     azure,
     autoplay,
     ttsTemplate,
     locale,
+    listeningKey,
     load,
     setAzureEndpoint,
     setAzureSubscription,
     setAutoplay,
     setTtsTemplate,
     setlocale,
+    setListeningKey,
   };
 });
