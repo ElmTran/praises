@@ -10,7 +10,10 @@ fn register<F>(app_handle: &AppHandle, name: &str, handler: F, key: &str) -> Res
     let hotkey = {
         if key.is_empty() {
             match get(name) {
-                Some(v) => v.as_str().unwrap().to_string(),
+                Some(v) => {
+                    info!("Loaded hotkey: {} for {}", v, name);
+                    v.as_str().unwrap().to_string()
+                }
                 None => {
                     set(name, "");
                     String::new()
@@ -39,8 +42,10 @@ fn listen_to_selection() {
     use selection::get_text;
     let text = get_text();
     let window = HANDLE.get().unwrap().get_window("main").unwrap();
-    info!("Listening to selection: {}", text);
-    let _ = window.emit(ClientEvent::PlayAudio.as_ref(), text);
+    if !text.is_empty() {
+        info!("Listening to selection: {}", text);
+        let _ = window.emit(ClientEvent::PlayAudio.as_ref(), text);
+    }
 }
 
 pub fn register_shortcut(shortcut: &str) -> Result<(), String> {
@@ -50,4 +55,9 @@ pub fn register_shortcut(shortcut: &str) -> Result<(), String> {
         _ => {}
     }
     Ok(())
+}
+
+pub fn register_shortcut_from_frontend(shortcut: &str) -> Result<(), String> {
+    let app_handle = HANDLE.get().unwrap();
+    register(app_handle, "hotkey_listen_to_selection", listen_to_selection, shortcut)
 }

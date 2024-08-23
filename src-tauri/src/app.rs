@@ -22,7 +22,14 @@ impl AppBuidler {
             ::default()
             .plugin(tauri_plugin_fs_watch::init())
             .plugin(tauri_plugin_store::Builder::default().build())
-            .invoke_handler(tauri::generate_handler![get_windows_devices, convert, reload_store])
+            .invoke_handler(
+                tauri::generate_handler![
+                    get_windows_devices,
+                    convert,
+                    reload_store,
+                    register_hotkey
+                ]
+            )
             .setup(|app| {
                 // define a closure to setup the app
                 HANDLE.get_or_init(|| app.handle());

@@ -108,12 +108,13 @@ h1 {
   .setting-box {
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 400px;
     .setting-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin: 0.6em 0;
+      .el-col {
+        align-content: center;
+      }
 
       .item__label {
         color: rgba(244, 91, 91, 0.8);

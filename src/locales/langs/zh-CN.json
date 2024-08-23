@@ -84,7 +84,8 @@
       "subscriptionKey": "订阅密钥",
       "language": "语言",
       "autoplay": "自动播放",
-      "listeningKey": "划词发音"
+      "listeningKey": "划词发音",
+      "apply": "应用"
     }
   }
 }
