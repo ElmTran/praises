@@ -2,6 +2,8 @@ import { reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { configStore } from "./config.ts";
 import { setupI18n } from "../locales";
+import { invoke } from "@tauri-apps/api";
+import { unregisterAll } from "@tauri-apps/api/globalShortcut";
 
 type SupportedLanguagesType = "en-US" | "zh-CN";
 type TemplateOption = {
@@ -76,6 +78,9 @@ export const useSettingStore = defineStore("setting", () => {
       listeningKey.value,
     );
     await configStore.value.save();
+    await unregisterAll();
+    console.log("register_hotkey", listeningKey.value);
+    invoke("register_hotkey", { shortcut: listeningKey.value });
   }
 
   return {

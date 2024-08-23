@@ -84,7 +84,8 @@
       "subscriptionKey": "Subscription Key",
       "language": "Language",
       "autoplay": "Autoplay",
-      "listeningKey": "Listening Shortcut"
+      "listeningKey": "Listening Shortcut",
+      "apply": "Apply"
     }
   }
 }

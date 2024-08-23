@@ -2,6 +2,7 @@
 use crate::app::HANDLE;
 use crate::services::tts::{ azure, windows, msedge };
 use crate::config;
+use crate::hotkeys;
 use tauri::Manager;
 use log::info;
 
@@ -47,4 +48,10 @@ pub fn reload_store() {
     let state = HANDLE.get().unwrap().state::<config::StoreWrapper>();
     let mut store = state.0.lock().unwrap();
     store.load().unwrap();
+}
+
+#[tauri::command]
+pub fn register_hotkey(shortcut: &str) {
+    info!("Registering hotkey: {}", shortcut);
+    hotkeys::register_shortcut_from_frontend(shortcut).unwrap();
 }
