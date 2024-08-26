@@ -27,7 +27,7 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [x] System Tray
 
-- [ ] Selection Speech Shortcut
+- [x] Selection Speech Shortcut
 
 ## License
 
