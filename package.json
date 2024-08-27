@@ -1,7 +1,7 @@
 {
   "name": "praises",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "lint-staged": {
     "*.{js,ts,tsx,vue}": [
