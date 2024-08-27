@@ -9,7 +9,7 @@ const { azure } = storeToRefs(settingStore);
 <template>
   <div class="setting-box">
     <el-row class="setting-item">
-      <el-col :span="8">
+      <el-col :span="10">
         <span class="item__label">{{ $t("setting.form.region") }}</span>
       </el-col>
       <el-col :span="14">
@@ -21,7 +21,7 @@ const { azure } = storeToRefs(settingStore);
       </el-col>
     </el-row>
     <el-row class="setting-item">
-      <el-col :span="8">
+      <el-col :span="10">
         <span class="item__label">{{
           $t("setting.form.subscriptionKey")
         }}</span>

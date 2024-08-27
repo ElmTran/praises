@@ -54,7 +54,7 @@ const save = () => {
 useSpeakerOptions(state.value.language);
 </script>
 <template>
-  <div class="form-container" :inline="true" label-width="140px">
+  <div class="form-box" :inline="true" label-width="140px">
     <el-form>
       <el-form-item>
         <template #label>
@@ -169,7 +169,7 @@ useSpeakerOptions(state.value.language);
         <el-select
           v-model="template"
           :placeholder="$t('tts.form.placeholder.template')"
-          style="width: 140px"
+          class="template-select"
           clearable
           filterable
           allow-create
@@ -197,11 +197,15 @@ useSpeakerOptions(state.value.language);
   </div>
 </template>
 <style scoped lang="scss">
-.form-container {
+.form-box {
   display: flex;
   flex-direction: column;
   flex: 1;
   .el-form {
+    .el-form-item {
+      margin-bottom: 1rem;
+    }
+
     .item-label {
       font-size: 14px;
       color: rgba(244, 91, 91, 0.8);
@@ -223,6 +227,9 @@ useSpeakerOptions(state.value.language);
     flex: 1;
     align-items: center;
     justify-content: space-between;
+    .template-select {
+      width: 140px;
+    }
     :deep(.el-select__wrapper) {
       padding: 0.8rem;
     }
