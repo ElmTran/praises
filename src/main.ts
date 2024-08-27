@@ -19,7 +19,7 @@ app.use(pinia);
 app.use(i18n);
 
 (async () => {
-  initStore();
-  useSettingStore().load();
+  await initStore();
+  await useSettingStore().load();
   app.mount("#app");
 })();

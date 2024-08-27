@@ -37,7 +37,7 @@ export const useSettingStore = defineStore("setting", () => {
     autoplay.value = await configStore.value.get("tts.autoplay");
     ttsTemplate.value = (await configStore.value.get("tts.template")) || [];
     locale.value = (await configStore.value.get("locale")) || "en-US";
-    setupI18n({ defaultLocale: locale.value });
+    await setupI18n({ defaultLocale: locale.value });
     listeningKey.value =
       (await configStore.value.get("hotkey_listen_to_selection")) || "";
   }
