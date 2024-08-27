@@ -40,7 +40,7 @@ const clearKeys = () => {
 <template>
   <div class="setting-box">
     <el-row class="setting-item">
-      <el-col :span="8">
+      <el-col :span="10">
         <span class="item__label">{{
           $t("setting.form.language")
         }}</span></el-col
@@ -61,7 +61,7 @@ const clearKeys = () => {
       </el-col>
     </el-row>
     <el-row class="setting-item">
-      <el-col :span="8">
+      <el-col :span="10">
         <span class="item__label">{{
           $t("setting.form.autoplay")
         }}</span></el-col
@@ -76,7 +76,7 @@ const clearKeys = () => {
       </el-col>
     </el-row>
     <el-row class="setting-item">
-      <el-col :span="8">
+      <el-col :span="10">
         <span class="item__label">{{
           $t("setting.form.listeningKey")
         }}</span></el-col

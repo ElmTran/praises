@@ -40,21 +40,23 @@ listen("PlayAudio", ({ payload }) => {
           <textarea id="textarea" v-model="state.text" name="textarea" />
         </div>
       </el-col>
-      <el-col :span="8" class="form-container">
-        <el-select
-          v-model="state.service"
-          placeholder="Please select service"
-          class="service-select"
-        >
-          <el-option
-            v-for="item in services"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <component :is="forms[state.service]" />
-        <FormButton />
+      <el-col :span="8">
+        <div class="form-container">
+          <el-select
+            v-model="state.service"
+            placeholder="Please select service"
+            class="service-select"
+          >
+            <el-option
+              v-for="item in services"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+          <component :is="forms[state.service]" />
+          <FormButton />
+        </div>
       </el-col>
     </el-row>
   </el-main>
@@ -67,37 +69,39 @@ listen("PlayAudio", ({ payload }) => {
 }
 .main-container {
   height: 100%;
-}
-.textarea-container {
-  height: 100%;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  textarea {
-    border-radius: 8px;
-    width: 100%;
-    height: 450px;
-    resize: none;
-    color: #fff;
-    border: 1px solid #414141;
-    background-color: transparent;
-    font-family: inherit;
-    padding: 12px 16px;
-    box-sizing: border-box; // make padding included in width
+  .textarea-container {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    textarea {
+      border-radius: 8px;
+      width: 100%;
+      height: 450px;
+      resize: none;
+      color: #fff;
+      border: 1px solid #414141;
+      background-color: transparent;
+      font-family: inherit;
+      padding: 12px 16px;
+      box-sizing: border-box; // make padding included in width
+    }
+    textarea:focus {
+      outline: none;
+      border: 1px solid rgba(202, 94, 155, 0.7);
+      box-shadow: rgba(245, 73, 145, 0.2) 0px 0px 0px 1px;
+    }
   }
-  textarea:focus {
-    outline: none;
-    border: 1px solid rgba(202, 94, 155, 0.7);
-    box-shadow: rgba(245, 73, 145, 0.2) 0px 0px 0px 1px;
-  }
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0 0;
-  :deep(.el-select__wrapper) {
-    padding: 0.8rem 1rem;
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    :deep(.el-select__wrapper) {
+      padding: 0.8rem 1rem;
+    }
+    .service-select {
+      margin: 0.6rem 0 1rem;
+    }
   }
 }
 </style>
