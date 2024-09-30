@@ -1,6 +1,6 @@
 {
   "tts": {
-    "form": {
+    "azure": {
       "language": "Language",
       "speaker": "Speaker",
       "style": "Style",
@@ -75,6 +75,56 @@
         "style": "Please select style",
         "role": "Please select role",
         "template": "Please select template"
+      }
+    },
+    "tiktok": {
+      "language": "Language",
+      "voice": "Voice",
+      "options": {
+        "language": {
+          "en_us": "English (US)",
+          "en_uk": "English (UK)",
+          "en_au": "English (Australia)",
+          "fr": "French",
+          "de": "German",
+          "es": "Spanish",
+          "es_mx": "Spanish (Mexico)",
+          "br": "Portuguese (Brazil)",
+          "id": "Indonesian",
+          "jp": "Japanese",
+          "kr": "Korean",
+          "characters": "Characters",
+          "singing": "Singing"
+        },
+        "voice": {
+          "female": "Female",
+          "male1": "Male 1",
+          "male2": "Male 2",
+          "male3": "Male 3",
+          "male4": "Male 4",
+          "male": "Male",
+          "female1": "Female 1",
+          "female2": "Female 2",
+          "female3": "Female 3",
+          "ghostface": "Ghostface",
+          "chewbacca": "Chewbacca",
+          "c3po": "C-3PO",
+          "stitch": "Stitch",
+          "stormtrooper": "Stormtrooper",
+          "rocket": "Rocket",
+          "alto": "Alto",
+          "tenor": "Tenor",
+          "sunshineSoon": "Sunshine Soon",
+          "warmyBreeze": "Warmy Breeze",
+          "glorious": "Glorious",
+          "itGoesUp": "It Goes Up",
+          "chipmunk": "Chipmunk",
+          "dramatic": "Dramatic"
+        }
+      },
+      "placeholder": {
+        "language": "Please select language",
+        "voice": "Please select voice"
       }
     }
   },

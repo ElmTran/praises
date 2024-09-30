@@ -19,7 +19,11 @@ const { state } = storeToRefs(ttsStore);
 const { ttsTemplate } = storeToRefs(settingStore);
 
 const useSpeakerOptions = (value: string) => {
-  const language = languageOptions.value.find((item) => item.value === value);
+  let language = languageOptions.value.find((item) => item.value === value);
+  if (!language) {
+    language = languageOptions.value[0];
+    state.value.language = language.value;
+  }
   speakerOptions.value = language?.speakers || [];
   state.value.speaker = speakerOptions.value[0].value;
   useStyleAndRoleOptions(state.value.speaker);
@@ -59,13 +63,13 @@ useSpeakerOptions(state.value.language);
       <el-form-item>
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.language") }}
+            {{ $t("tts.azure.language") }}
           </span>
         </template>
         <el-select
           v-model="state.language"
           class="form-item"
-          :placeholder="$t('tts.form.placeholder.language')"
+          :placeholder="$t('tts.azure.placeholder.language')"
           :popper-append-to-body="false"
           @change="useSpeakerOptions(state.language)"
         >
@@ -80,13 +84,13 @@ useSpeakerOptions(state.value.language);
       <el-form-item>
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.speaker") }}
+            {{ $t("tts.azure.speaker") }}
           </span>
         </template>
         <el-select
           v-model="state.speaker"
           class="form-item"
-          :placeholder="$t('tts.form.placeholder.speaker')"
+          :placeholder="$t('tts.azure.placeholder.speaker')"
           @change="useStyleAndRoleOptions(state.speaker)"
         >
           <el-option
@@ -100,12 +104,12 @@ useSpeakerOptions(state.value.language);
       <el-form-item v-if="styleOptions.length">
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.style") }}
+            {{ $t("tts.azure.style") }}
           </span>
         </template>
         <el-select
           v-model="state.style"
-          :placeholder="$t('tts.form.placeholder.style')"
+          :placeholder="$t('tts.azure.placeholder.style')"
           class="form-item"
         >
           <el-option
@@ -119,12 +123,12 @@ useSpeakerOptions(state.value.language);
       <el-form-item v-if="roleOptions.length">
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.role") }}
+            {{ $t("tts.azure.role") }}
           </span>
         </template>
         <el-select
           v-model="state.role"
-          :placeholder="$t('tts.form.placeholder.role')"
+          :placeholder="$t('tts.azure.placeholder.role')"
           class="form-item"
         >
           <el-option
@@ -138,7 +142,7 @@ useSpeakerOptions(state.value.language);
       <el-form-item>
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.rate") }}
+            {{ $t("tts.azure.rate") }}
           </span>
         </template>
         <el-slider
@@ -152,7 +156,7 @@ useSpeakerOptions(state.value.language);
       <el-form-item>
         <template #label>
           <span class="item-label">
-            {{ $t("tts.form.pitch") }}
+            {{ $t("tts.azure.pitch") }}
           </span>
         </template>
         <el-slider
@@ -168,7 +172,7 @@ useSpeakerOptions(state.value.language);
       <span>
         <el-select
           v-model="template"
-          :placeholder="$t('tts.form.placeholder.template')"
+          :placeholder="$t('tts.azure.placeholder.template')"
           class="template-select"
           clearable
           filterable
@@ -191,7 +195,7 @@ useSpeakerOptions(state.value.language);
             />
           </svg>
         </span>
-        <p class="btnLabel">{{ $t("tts.form.save") }}</p>
+        <p class="btnLabel">{{ $t("tts.azure.save") }}</p>
       </button>
     </div>
   </div>

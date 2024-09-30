@@ -1,6 +1,6 @@
 {
   "tts": {
-    "form": {
+    "azure": {
       "language": "语言",
       "speaker": "语音",
       "style": "风格",
@@ -13,7 +13,20 @@
         "language": {
           "en": "英语",
           "zh": "中文",
-          "ja": "日语"
+          "ja": "日语",
+          "en_us": "英语（美国）",
+          "en_uk": "英语（英国）",
+          "en_au": "英语（澳大利亚）",
+          "fr": "法语",
+          "de": "德语",
+          "es": "西班牙语",
+          "es_mx": "西班牙语（墨西哥）",
+          "br": "葡萄牙语（巴西）",
+          "id": "印度尼西亚语",
+          "jp": "日语",
+          "kr": "韩语",
+          "characters": "角色语音",
+          "singing": "歌唱"
         },
         "speaker": {
           "aria": "Aria",
@@ -75,6 +88,56 @@
         "style": "请选择风格",
         "role": "请选择角色",
         "template": "请选择模板"
+      }
+    },
+    "tiktok": {
+      "language": "语言",
+      "voice": "语音",
+      "options": {
+        "language": {
+          "en_us": "英语（美国）",
+          "en_uk": "英语（英国）",
+          "en_au": "英语（澳大利亚）",
+          "fr": "法语",
+          "de": "德语",
+          "es": "西班牙语",
+          "es_mx": "西班牙语（墨西哥）",
+          "br": "葡萄牙语（巴西）",
+          "id": "印度尼西亚语",
+          "jp": "日语",
+          "kr": "韩语",
+          "characters": "角色语音",
+          "singing": "歌唱"
+        },
+        "voice": {
+          "female": "女性",
+          "male1": "男性1",
+          "male2": "男性2",
+          "male3": "男性3",
+          "male4": "男性4",
+          "male": "男性",
+          "female1": "女性1",
+          "female2": "女性2",
+          "female3": "女性3",
+          "ghostface": "鬼脸",
+          "chewbacca": "丘巴卡",
+          "c3po": "C-3PO",
+          "stitch": "史迪奇",
+          "stormtrooper": "冲锋队员",
+          "rocket": "火箭浣熊",
+          "alto": "女中音",
+          "tenor": "男高音",
+          "sunshineSoon": "阳光很快",
+          "warmyBreeze": "温暖微风",
+          "glorious": "光辉灿烂",
+          "itGoesUp": "音调上升",
+          "chipmunk": "花栗鼠",
+          "dramatic": "戏剧性的"
+        }
+      },
+      "placeholder": {
+        "language": "请选择语言",
+        "voice": "请选择语音"
       }
     }
   },

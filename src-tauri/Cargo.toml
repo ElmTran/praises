@@ -1,6 +1,6 @@
 [package]
 name = "praises"
-version = "0.0.5"
+version = "0.0.6"
 description = "Praises is a text-to-speech tool that can help you read text easily."
 authors = ["ElmTran"]
 edition = "2021"
@@ -48,6 +48,7 @@ url = "2.5.2"
 regex = "1.10.5"
 strum_macros = "0.26.4"
 strum = "0.26.3"
+base64 = "0.22.1"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

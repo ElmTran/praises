@@ -11,7 +11,7 @@ const convert = () => {
 <template>
   <div class="bottom-container">
     <button class="button" @click="convert">
-      <span class="button-content">{{ $t("tts.form.convert") }}</span>
+      <span class="button-content">{{ $t("tts.azure.convert") }}</span>
     </button>
   </div>
 </template>
