@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import AzureForm from "./components/AzureForm.vue";
+import TikTokForm from "./components/TikTokForm.vue";
 import FormButton from "./components/FormButton.vue";
 import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
@@ -12,15 +13,16 @@ const { state } = storeToRefs(ttsStore);
 const services = reactive([
   { value: "msedge", label: "Microsoft Edge" },
   { value: "azure", label: "Azure" },
+  { value: "tiktok", label: "TikTok" },
   // { value: "native", label: "Native" },
-  // { value: "tiktok", label: "TikTok" },
   // { value: "windows", label: "Windows" },
   // { value: "chat_tts", label: "ChatTTS" },
 ]);
 
-const forms: { [key: string]: typeof AzureForm } = {
+const forms: { [key: string]: typeof AzureForm | typeof TikTokForm } = {
   azure: AzureForm,
   msedge: AzureForm, // AzureForm is used for both Azure and Edge
+  tiktok: TikTokForm,
 };
 
 listen("Navigate", ({ payload }) => {

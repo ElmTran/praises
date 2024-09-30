@@ -1,6 +1,6 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 use crate::app::HANDLE;
-use crate::services::tts::{ azure, windows, msedge };
+use crate::services::tts::{ azure, windows, msedge, tiktok };
 use crate::config;
 use crate::hotkeys;
 use tauri::Manager;
@@ -39,6 +39,7 @@ pub async fn convert(
             tts.receive().await
         }
         "azure" => { azure::request(text, speaker, language, style, role, rate, pitch).await }
+        "tiktok" => { tiktok::request(text, speaker).await }
         _ => Err("Invalid service".to_string()),
     }
 }
