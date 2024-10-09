@@ -21,7 +21,7 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [x] i18n
 
-~~ChatTTS API~~
+- [ ] ~~ChatTTS API~~
 
 - [x] GitHub Actions
 
