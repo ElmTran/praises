@@ -1,5 +1,7 @@
 import { computed, type ComputedRef } from "vue";
 import { $t } from "../locales";
+import * as languages from "./options/languages";
+
 export type SpeakerOption = {
   value: string;
   label: string;
@@ -13,9 +15,12 @@ export type LanguageOption = {
   speakers: SpeakerOption[];
 };
 
-export const languageOptions: ComputedRef<LanguageOption[]> = computed(() => [
-  
-]);
+export const languageOptions: ComputedRef<LanguageOption[]> = computed(
+  () =>
+    languages.languageOrder.map(
+      (key) => languages[key as keyof typeof languages],
+    ) as LanguageOption[],
+);
 
 type TiktokLanguageOption = {
   value: string;
