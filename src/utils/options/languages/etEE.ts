@@ -2,7 +2,7 @@
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
 
-export const esVE: LanguageOption = {
+export const etEE: LanguageOption = {
   value: "et-EE",
   label: $t("tts.azure.options.language.et_EE"),
   speakers: [

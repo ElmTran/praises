@@ -71,6 +71,7 @@ useSpeakerOptions(state.value.language);
           class="form-item"
           :placeholder="$t('tts.azure.placeholder.language')"
           :popper-append-to-body="false"
+          filterable
           @change="useSpeakerOptions(state.language)"
         >
           <el-option
@@ -91,6 +92,7 @@ useSpeakerOptions(state.value.language);
           v-model="state.speaker"
           class="form-item"
           :placeholder="$t('tts.azure.placeholder.speaker')"
+          filterable
           @change="useStyleAndRoleOptions(state.speaker)"
         >
           <el-option
