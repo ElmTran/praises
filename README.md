@@ -79,6 +79,8 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [x] TikTok API
 
+- [x] Support More Languages and Speakers in Azure API
+
 - [ ] Support Speech Synthesis Markup Language (SSML)
 
 ## License
