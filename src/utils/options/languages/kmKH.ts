@@ -1,8 +1,9 @@
 // km-KH file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const kmKH: LanguageOption = {
+export const kmKH: ComputedRef<LanguageOption> = computed(() => ({
   value: "km-KH",
   label: $t("tts.azure.options.language.km_KH"),
   speakers: [
@@ -27,4 +28,4 @@ export const kmKH: LanguageOption = {
       ],
     },
   ],
-};
+}));

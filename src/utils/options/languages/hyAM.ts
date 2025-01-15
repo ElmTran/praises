@@ -1,7 +1,8 @@
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const hyAM: LanguageOption = {
+export const hyAM: ComputedRef<LanguageOption> = computed(() => ({
   value: "hy-AM",
   label: $t("tts.azure.options.language.hy_AM"),
   speakers: [
@@ -26,4 +27,4 @@ export const hyAM: LanguageOption = {
       ],
     },
   ],
-};
+}));

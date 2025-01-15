@@ -1,8 +1,9 @@
 // si-LK file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const siLK: LanguageOption = {
+export const siLK: ComputedRef<LanguageOption> = computed(() => ({
   value: "si-LK",
   label: $t("tts.azure.options.language.si_LK"),
   speakers: [
@@ -27,4 +28,4 @@ export const siLK: LanguageOption = {
       ],
     },
   ],
-};
+}));

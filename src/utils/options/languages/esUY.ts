@@ -1,8 +1,9 @@
 // es-UY file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const esUY: LanguageOption = {
+export const esUY: ComputedRef<LanguageOption> = computed(() => ({
   value: "es-UY",
   label: $t("tts.azure.options.language.es_UY"),
   speakers: [
@@ -27,4 +28,4 @@ export const esUY: LanguageOption = {
       ],
     },
   ],
-};
+}));

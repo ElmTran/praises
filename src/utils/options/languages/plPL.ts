@@ -1,8 +1,9 @@
 // pl-PL file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const plPL: LanguageOption = {
+export const plPL: ComputedRef<LanguageOption> = computed(() => ({
   value: "pl-PL",
   label: $t("tts.azure.options.language.pl_PL"),
   speakers: [
@@ -37,4 +38,4 @@ export const plPL: LanguageOption = {
       ],
     },
   ],
-};
+}));

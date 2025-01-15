@@ -303,4 +303,4 @@ export const languageOrder = [
   "zhHK",
   "zhTW",
   "zuZA"
-] as const;
+];

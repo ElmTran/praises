@@ -1,8 +1,9 @@
 // sk-SK file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const skSK: LanguageOption = {
+export const skSK: ComputedRef<LanguageOption> = computed(() => ({
   value: "sk-SK",
   label: $t("tts.azure.options.language.sk_SK"),
   speakers: [
@@ -27,4 +28,4 @@ export const skSK: LanguageOption = {
       ],
     },
   ],
-};
+}));

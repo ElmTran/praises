@@ -1,7 +1,8 @@
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const gaIE: LanguageOption = {
+export const gaIE: ComputedRef<LanguageOption> = computed(() => ({
   value: "ga-IE",
   label: $t("tts.azure.options.language.ga_IE"),
   speakers: [
@@ -26,4 +27,4 @@ export const gaIE: LanguageOption = {
       ],
     },
   ],
-};
+}));
