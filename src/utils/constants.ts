@@ -15,12 +15,12 @@ export type LanguageOption = {
   speakers: SpeakerOption[];
 };
 
-export const languageOptions: ComputedRef<LanguageOption[]> = computed(
-  () =>
-    languages.languageOrder.map(
-      (key) => languages[key as keyof typeof languages],
-    ) as LanguageOption[],
-);
+export const languageOptions = computed(() => languages.languageOrder.map(
+  (key) => {
+    const language = languages[key as keyof typeof languages];
+    return (language as ComputedRef<LanguageOption>).value;
+  }
+));
 
 type TiktokLanguageOption = {
   value: string;

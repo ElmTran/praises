@@ -1,7 +1,8 @@
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const msMY: LanguageOption = {
+export const msMY: ComputedRef<LanguageOption> = computed(() => ({
   value: "ms-MY",
   label: $t("tts.azure.options.language.ms_MY"),
   speakers: [
@@ -26,4 +27,4 @@ export const msMY: LanguageOption = {
       ],
     },
   ],
-};
+}));

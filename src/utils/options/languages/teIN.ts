@@ -1,8 +1,9 @@
 // te-IN file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const teIN: LanguageOption = {
+export const teIN: ComputedRef<LanguageOption> = computed(() => ({
   value: "te-IN",
   label: $t("tts.azure.options.language.te_IN"),
   speakers: [
@@ -27,4 +28,4 @@ export const teIN: LanguageOption = {
       ],
     },
   ],
-};
+}));

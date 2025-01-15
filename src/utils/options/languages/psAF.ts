@@ -1,8 +1,9 @@
 // ps-AF file created
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const psAF: LanguageOption = {
+export const psAF: ComputedRef<LanguageOption> = computed(() => ({
   value: "ps-AF",
   label: $t("tts.azure.options.language.ps_AF"),
   speakers: [
@@ -27,4 +28,4 @@ export const psAF: LanguageOption = {
       ],
     },
   ],
-};
+}));

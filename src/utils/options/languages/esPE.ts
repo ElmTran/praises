@@ -1,7 +1,8 @@
 import type { LanguageOption } from "../../constants";
 import { $t } from "../../../locales";
+import { computed, type ComputedRef } from "vue";
 
-export const esPE: LanguageOption = {
+export const esPE: ComputedRef<LanguageOption> = computed(() => ({
   value: "es-PE",
   label: $t("tts.azure.options.language.es_PE"),
   speakers: [
@@ -26,4 +27,4 @@ export const esPE: LanguageOption = {
       ],
     },
   ],
-};
+}));
