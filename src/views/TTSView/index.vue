@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import AzureForm from "./components/AzureForm.vue";
 import TikTokForm from "./components/TikTokForm.vue";
 import FormButton from "./components/FormButton.vue";
@@ -14,10 +14,28 @@ const services = reactive([
   { value: "msedge", label: "Microsoft Edge" },
   { value: "azure", label: "Azure" },
   { value: "tiktok", label: "TikTok" },
-  // { value: "native", label: "Native" },
-  // { value: "windows", label: "Windows" },
-  // { value: "chat_tts", label: "ChatTTS" },
 ]);
+
+const ssmlTemplate = `
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis"
+       xmlns:mstts="http://www.w3.org/2001/mstts" xml:lang="en-US">
+    <voice name="en-US-JennyNeural">
+        Hello World!
+    </voice>
+</speak>`;
+
+watch(
+  () => state.value.ssml,
+  (newValue) => {
+    if (newValue) {
+      if (!state.value.text.trim()) {
+        state.value.text = ssmlTemplate;
+      }
+    } else {
+      state.value.text = "";
+    }
+  },
+);
 
 const forms: { [key: string]: typeof AzureForm | typeof TikTokForm } = {
   azure: AzureForm,
@@ -40,6 +58,15 @@ listen("PlayAudio", ({ payload }) => {
       <el-col :span="16">
         <div class="textarea-container">
           <textarea id="textarea" v-model="state.text" name="textarea" />
+          <div class="textarea-footer">
+            <el-switch
+              v-model="state.ssml"
+              class="ssml-switch"
+              inline-prompt
+              active-text="SSML"
+              inactive-text="Text"
+            />
+          </div>
         </div>
       </el-col>
       <el-col :span="8">
@@ -75,7 +102,19 @@ listen("PlayAudio", ({ payload }) => {
     height: 100%;
     padding: 0 10px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+
+    .textarea-footer {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      .ssml-switch {
+        margin-right: 10px;
+        --el-switch-on-color: #ca5e9b;
+        --el-switch-off-color: #414141;
+      }
+    }
     textarea {
       border-radius: 8px;
       width: 100%;

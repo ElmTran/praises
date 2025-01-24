@@ -19,6 +19,7 @@ pub struct MsEdgeTTS {
     rate: String,
     pitch: String,
     volume: String,
+    raw_ssml: bool,
     ws: WebSocketStream<MaybeTlsStream<TcpStream>>,
 }
 
@@ -50,7 +51,8 @@ impl MsEdgeTTS {
         language: String,
         rate: String,
         pitch: String,
-        volume: String
+        volume: String,
+        raw_ssml: bool
     ) -> Self {
         let ws = connect_async(SYNTH_URL).await.unwrap().0;
         Self {
@@ -60,6 +62,7 @@ impl MsEdgeTTS {
             rate,
             pitch,
             volume,
+            raw_ssml,
             ws,
         }
     }
@@ -80,6 +83,7 @@ impl MsEdgeTTS {
 
     pub async fn send(&mut self) {
         let ssml = self.build_ssml();
+        info!("Sending ssml: {}", ssml);
         let request = format!(
             "X-RequestId:{}\r\nContent-Type:application/ssml+xml\r\nPath:ssml\r\n\r\n{}",
             Uuid::new_v4(),
@@ -156,27 +160,31 @@ impl MsEdgeTTS {
     }
 
     fn build_ssml(&self) -> String {
-        format!(
-            r#"
-            <speak version="1.0"
-                    xmlns="http://www.w3.org/2001/10/synthesis"
-                    xmlns:mstts="http://www.w3.org/2001/mstts"
-                    xmlns:emo="http://www.w3.org/2009/10/emotionml"
-                    xml:lang="{}"
-                >
-                <voice name="{}">
-                    <prosody rate="{}%" pitch="{}%" volume="{}%">
-                        {}
-                    </prosody>
-                </voice>
-            </speak>
-        "#,
-            self.language,
-            self.speaker,
-            self.rate,
-            self.pitch,
-            self.volume,
-            self.text
-        )
+        if self.raw_ssml {
+            self.text.clone()
+        } else {
+            format!(
+                r#"
+                <speak version="1.0"
+                        xmlns="http://www.w3.org/2001/10/synthesis"
+                        xmlns:mstts="http://www.w3.org/2001/mstts"
+                        xmlns:emo="http://www.w3.org/2009/10/emotionml"
+                        xml:lang="{}"
+                    >
+                    <voice name="{}">
+                        <prosody rate="{}%" pitch="{}%" volume="{}%">
+                            {}
+                        </prosody>
+                    </voice>
+                </speak>
+            "#,
+                self.language,
+                self.speaker,
+                self.rate,
+                self.pitch,
+                self.volume,
+                self.text
+            )
+        }
     }
 }

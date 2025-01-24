@@ -77,8 +77,13 @@ pub async fn request(
     style: &str,
     role: &str,
     rate: &str,
-    pitch: &str
+    pitch: &str,
+    raw_ssml: bool
 ) -> Result<Vec<u8>, String> {
-    let xml = build_ssml(text, speaker, language, style, role, rate, pitch);
+    let xml = if raw_ssml {
+        text.to_string()
+    } else {
+        build_ssml(text, speaker, language, style, role, rate, pitch)
+    };
     send(xml).await.map_err(|e| format!("Azure TTS failed: {}", e))
 }

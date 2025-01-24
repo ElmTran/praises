@@ -8,6 +8,7 @@ export const useTtsStore = defineStore("tts", () => {
   const state = reactive({
     service: "msedge",
     text: "",
+    ssml: false,
     language: "en-US",
     speaker: "",
     style: "",
@@ -21,7 +22,13 @@ export const useTtsStore = defineStore("tts", () => {
       const rate = state.rate.toString();
       const pitch = state.pitch.toString();
       const volume = state.volume.toString();
-      const payload = { ...state, rate: rate, pitch: pitch, volume: volume };
+      const payload = {
+        ...state,
+        rate: rate,
+        pitch: pitch,
+        volume: volume,
+        rawSsml: state.ssml,
+      };
       const resp: Uint8Array | string = await invoke("convert", payload);
       if (typeof resp === "string") {
         console.error(`convert error: ${resp}`);
