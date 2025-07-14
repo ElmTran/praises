@@ -3,7 +3,8 @@ use serde_json::json;
 use std::error::Error;
 use crate::config;
 
-static ENDPOINT: &str = "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation";
+static ENDPOINT: &str =
+    "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation";
 
 pub struct QwenTTS {
     text: String,
@@ -29,27 +30,29 @@ impl QwenTTS {
             .post(ENDPOINT)
             .header("Authorization", format!("Bearer {}", api_key))
             .header("Content-Type", "application/json")
-            .json(&json!({
+            .json(
+                &json!({
                 "model": self.model,
                 "input": {
                     "text": self.text,
                     "voice": self.voice
                 }
-            }))
-            .send()
-            .await?;
+            })
+            )
+            .send().await?;
 
         let res = res.error_for_status()?;
         let data = res.json::<serde_json::Value>().await?;
-        
+
         // Check if the response is successful
         if let Some(output) = data.get("output") {
-            if let Some(audio_url) = output.get("audio_url") {
-                if let Some(url) = audio_url.as_str() {
-                    // Download the audio file from the URL
-                    let audio_response = client.get(url).send().await?;
-                    let audio_bytes = audio_response.bytes().await?;
-                    return Ok(audio_bytes.to_vec());
+            if let Some(audio) = output.get("audio") {
+                if let Some(audio_url) = audio.get("url") {
+                    if let Some(url) = audio_url.as_str() {
+                        let audio_response = client.get(url).send().await?;
+                        let audio_bytes = audio_response.bytes().await?;
+                        return Ok(audio_bytes.to_vec());
+                    }
                 }
             }
         }
@@ -61,4 +64,4 @@ impl QwenTTS {
 pub async fn request(text: &str, voice: &str, model: &str) -> Result<Vec<u8>, String> {
     let tts = QwenTTS::new(text.to_string(), voice.to_string(), model.to_string());
     tts.send().await.map_err(|e| e.to_string())
-} 
+}

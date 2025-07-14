@@ -1,6 +1,6 @@
 [package]
 name = "praises"
-version = "0.1.0"
+version = "0.1.1"
 description = "Praises is a text-to-speech tool that can help you read text easily."
 authors = ["ElmTran"]
 edition = "2021"

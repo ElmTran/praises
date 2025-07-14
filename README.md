@@ -83,6 +83,8 @@ You can download the latest version from the [release page](https://github.com/E
 
 - [x] Support Speech Synthesis Markup Language (SSML)
 
+- [x] Support Qwen TTS API
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.

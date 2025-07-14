@@ -8,6 +8,7 @@ import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
 import { listen } from "@tauri-apps/api/event";
 import router from "../../router";
+import { $t } from "../../locales";
 
 const ttsStore = useTtsStore();
 const { state } = storeToRefs(ttsStore);
@@ -15,7 +16,7 @@ const services = reactive([
   { value: "msedge", label: "Microsoft Edge" },
   { value: "azure", label: "Azure" },
   { value: "tiktok", label: "TikTok" },
-  { value: "qwen", label: "Qwen" },
+  { value: "qwen", label: $t("tts.qwen.qwen") },
 ]);
 
 const ssmlTemplate = `
@@ -35,6 +36,16 @@ watch(
       }
     } else {
       state.value.text = "";
+    }
+  },
+);
+
+watch(
+  () => state.value.service,
+  (newValue) => {
+    if (newValue === "qwen") {
+      state.value.model = "qwen-tts-latest";
+      state.value.speaker = "Chelsie";
     }
   },
 );

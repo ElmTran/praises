@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { qwenVoiceOptions, qwenModelOptions } from "../../../utils/constants";
 import { useTtsStore } from "../../../store/tts";
 import { storeToRefs } from "pinia";

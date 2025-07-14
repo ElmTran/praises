@@ -746,6 +746,7 @@
       }
     },
     "qwen": {
+      "qwen": "Qwen",
       "model": "Model",
       "voice": "Voice",
       "options": {

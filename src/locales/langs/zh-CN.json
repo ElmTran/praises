@@ -746,17 +746,18 @@
             }
         },
         "qwen": {
+            "qwen": "千问",
             "model": "模型",
             "voice": "声音",
             "options": {
                 "voice": {
-                    "chelsie": "Chelsie（女）",
-                    "cherry": "Cherry（女）",
-                    "ethan": "Ethan（男）",
-                    "serena": "Serena（女）",
-                    "dylan": "Dylan（北京话-男）",
-                    "jada": "Jada（吴语-女）",
-                    "sunny": "Sunny（四川话-女）"
+                    "chelsie": "蔡斯（女）",
+                    "cherry": "樱桃（女）",
+                    "ethan": "伊桑（男）",
+                    "serena": "塞雷娜（女）",
+                    "dylan": "迪伦（北京话-男）",
+                    "jada": "贾达（吴语-女）",
+                    "sunny": "孙妮（四川话-女）"
                 }
             },
             "placeholder": {
