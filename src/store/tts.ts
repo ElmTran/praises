@@ -16,6 +16,7 @@ export const useTtsStore = defineStore("tts", () => {
     rate: 0,
     pitch: 0,
     volume: 100,
+    model: "qwen-tts",
   });
   async function convert() {
     try {

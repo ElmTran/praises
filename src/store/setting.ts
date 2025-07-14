@@ -23,6 +23,9 @@ export const useSettingStore = defineStore("setting", () => {
     region: "",
     subscription: "",
   });
+  const qwen = reactive({
+    apiKey: "",
+  });
   const autoplay = ref();
   const ttsTemplate = ref<TemplateOption[]>([]);
   const locale = ref<SupportedLanguagesType>("en-US");
@@ -34,6 +37,7 @@ export const useSettingStore = defineStore("setting", () => {
     azure.region = endpoint?.split(".")[0].split("https://")[1] || "";
     azure.subscription =
       (await configStore.value.get("azure.subscription")) || "";
+    qwen.apiKey = (await configStore.value.get("qwen.api_key")) || "";
     autoplay.value = await configStore.value.get("tts.autoplay");
     ttsTemplate.value = (await configStore.value.get("tts.template")) || [];
     locale.value = (await configStore.value.get("locale")) || "en-US";
@@ -55,6 +59,11 @@ export const useSettingStore = defineStore("setting", () => {
     await configStore.value.save();
   }
 
+  async function setQwenApiKey() {
+    await configStore.value.set("qwen.api_key", qwen.apiKey);
+    await configStore.value.save();
+  }
+
   async function setAutoplay() {
     await configStore.value.set("tts.autoplay", autoplay.value);
     await configStore.value.save();
@@ -73,18 +82,15 @@ export const useSettingStore = defineStore("setting", () => {
   }
 
   async function setListeningKey() {
-    await configStore.value.set(
-      "hotkey_listen_to_selection",
-      listeningKey.value,
-    );
+    await configStore.value.set("hotkey_listen_to_selection", listeningKey.value);
     await configStore.value.save();
-    await unregisterAll();
-    console.log("register_hotkey", listeningKey.value);
-    invoke("register_hotkey", { shortcut: listeningKey.value });
+    unregisterAll();
+    await invoke("register_hotkey", { shortcut: listeningKey.value });
   }
 
   return {
     azure,
+    qwen,
     autoplay,
     ttsTemplate,
     locale,
@@ -92,6 +98,7 @@ export const useSettingStore = defineStore("setting", () => {
     load,
     setAzureEndpoint,
     setAzureSubscription,
+    setQwenApiKey,
     setAutoplay,
     setTtsTemplate,
     setlocale,

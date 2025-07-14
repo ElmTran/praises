@@ -201,3 +201,22 @@ export const tiktokLanguageOptions: ComputedRef<TiktokLanguageOption[]> =
       ],
     },
   ]);
+
+export const qwenModelOptions: ComputedRef<{ value: string; label: string }[]> = 
+  computed(() => [
+    { value: "qwen-tts", label: "Qwen TTS" },
+    { value: "qwen-tts-latest", label: "Qwen TTS Latest" },
+    { value: "qwen-tts-2025-05-22", label: "Qwen TTS 2025-05-22" },
+    { value: "qwen-tts-2025-04-10", label: "Qwen TTS 2025-04-10" },
+  ]);
+
+export const qwenVoiceOptions: ComputedRef<{ value: string; label: string }[]> = 
+  computed(() => [
+    { value: "Chelsie", label: $t("tts.qwen.options.voice.chelsie") },
+    { value: "Cherry", label: $t("tts.qwen.options.voice.cherry") },
+    { value: "Ethan", label: $t("tts.qwen.options.voice.ethan") },
+    { value: "Serena", label: $t("tts.qwen.options.voice.serena") },
+    { value: "Dylan", label: $t("tts.qwen.options.voice.dylan") },
+    { value: "Jada", label: $t("tts.qwen.options.voice.jada") },
+    { value: "Sunny", label: $t("tts.qwen.options.voice.sunny") },
+  ]);

@@ -744,12 +744,32 @@
                 "language": "请选择语言",
                 "voice": "请选择声音"
             }
+        },
+        "qwen": {
+            "model": "模型",
+            "voice": "声音",
+            "options": {
+                "voice": {
+                    "chelsie": "Chelsie（女）",
+                    "cherry": "Cherry（女）",
+                    "ethan": "Ethan（男）",
+                    "serena": "Serena（女）",
+                    "dylan": "Dylan（北京话-男）",
+                    "jada": "Jada（吴语-女）",
+                    "sunny": "Sunny（四川话-女）"
+                }
+            },
+            "placeholder": {
+                "model": "请选择模型",
+                "voice": "请选择声音"
+            }
         }
     },
     "setting": {
         "form": {
             "region": "区域",
             "subscriptionKey": "订阅密钥",
+            "qwenApiKey": "Qwen API 密钥",
             "language": "语言",
             "autoplay": "自动播放",
             "listeningKey": "监听快捷键",

@@ -744,12 +744,32 @@
         "language": "Please select language",
         "voice": "Please select voice"
       }
+    },
+    "qwen": {
+      "model": "Model",
+      "voice": "Voice",
+      "options": {
+        "voice": {
+          "chelsie": "Chelsie (Female)",
+          "cherry": "Cherry (Female)",
+          "ethan": "Ethan (Male)",
+          "serena": "Serena (Female)",
+          "dylan": "Dylan (Beijing - Male)",
+          "jada": "Jada (Wu - Female)",
+          "sunny": "Sunny (Sichuan - Female)"
+        }
+      },
+      "placeholder": {
+        "model": "Please select model",
+        "voice": "Please select voice"
+      }
     }
   },
   "setting": {
     "form": {
       "region": "Region",
       "subscriptionKey": "Subscription Key",
+      "qwenApiKey": "Qwen API Key",
       "language": "Language",
       "autoplay": "Autoplay",
       "listeningKey": "Listening Shortcut",

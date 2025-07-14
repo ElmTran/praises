@@ -2,6 +2,7 @@
 import { reactive, watch } from "vue";
 import AzureForm from "./components/AzureForm.vue";
 import TikTokForm from "./components/TikTokForm.vue";
+import QwenForm from "./components/QwenForm.vue";
 import FormButton from "./components/FormButton.vue";
 import { useTtsStore } from "../../store/tts";
 import { storeToRefs } from "pinia";
@@ -14,6 +15,7 @@ const services = reactive([
   { value: "msedge", label: "Microsoft Edge" },
   { value: "azure", label: "Azure" },
   { value: "tiktok", label: "TikTok" },
+  { value: "qwen", label: "Qwen" },
 ]);
 
 const ssmlTemplate = `
@@ -37,10 +39,13 @@ watch(
   },
 );
 
-const forms: { [key: string]: typeof AzureForm | typeof TikTokForm } = {
+const forms: {
+  [key: string]: typeof AzureForm | typeof TikTokForm | typeof QwenForm;
+} = {
   azure: AzureForm,
   msedge: AzureForm, // AzureForm is used for both Azure and Edge
   tiktok: TikTokForm,
+  qwen: QwenForm,
 };
 
 listen("Navigate", ({ payload }) => {

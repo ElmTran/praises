@@ -1,6 +1,6 @@
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 use crate::app::HANDLE;
-use crate::services::tts::{ azure, windows, msedge, tiktok };
+use crate::services::tts::{ azure, windows, msedge, tiktok, qwen };
 use crate::config;
 use crate::hotkeys;
 use tauri::Manager;
@@ -22,7 +22,8 @@ pub async fn convert(
     role: &str,
     rate: &str,
     pitch: &str,
-    volume: &str
+    volume: &str,
+    model: Option<&str>
 ) -> Result<Vec<u8>, String> {
     info!(
         "Converting {} to speech using service: {}",
@@ -52,6 +53,10 @@ pub async fn convert(
             azure::request(text, speaker, language, style, role, rate, pitch, raw_ssml).await
         }
         "tiktok" => { tiktok::request(text, speaker).await }
+        "qwen" => { 
+            let model = model.unwrap_or("qwen-tts");
+            qwen::request(text, speaker, model).await 
+        }
         _ => Err("Invalid service".to_string()),
     }
 }
