@@ -14,6 +14,7 @@ import CommonSetting from "./components/Common.vue";
 </template>
 <style scoped lang="scss">
 .main {
-  padding: 5px 20px;
+  flex: 1;
+  padding: 18px 20px;
 }
 </style>

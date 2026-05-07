@@ -25,39 +25,44 @@ const goToSetting = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+
   .sidebar-group {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background-color: rgba(245, 73, 145, 0.4);
-    // 透明度
-    opacity: 0.8;
-    width: 40px;
-    height: 80%;
-    border-radius: 10px;
-    box-shadow:
-      rgba(0, 0, 0, 0.2) 0px 5px 15px,
-      rgba(245, 73, 145, 0.2) 5px 10px 15px;
+    gap: 8px;
+    width: 44px;
+    padding: 8px 4px;
+    border: 1px solid var(--app-border-soft);
+    border-radius: 14px;
+    background: var(--app-surface);
+
     .button {
       outline: 0;
       border: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       background-color: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      transition: all ease-in-out 0.3s;
+      color: var(--app-text-muted);
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
       cursor: pointer;
     }
+
     .button:hover {
-      transform: scale(1.1);
+      color: var(--app-accent);
+      background: var(--app-accent-soft);
+      transform: translateY(-1px);
     }
+
     .icon {
-      font-size: 15px;
+      font-size: 16px;
     }
   }
 }

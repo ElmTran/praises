@@ -23,62 +23,64 @@ const { autoplay } = storeToRefs(settingStore);
 
 <style scoped lang="scss">
 .footer {
-  padding: 0;
+  flex: 0 0 auto;
+  height: 58px;
+  padding: 6px 20px 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+
   .play-bar {
     display: flex;
     align-items: center;
+    gap: 10px;
+    width: min(460px, 100%);
+    padding: 5px 10px;
+    border: 1px solid var(--app-border-soft);
+    border-radius: 999px;
+    background: var(--app-surface-strong);
+
     audio {
-      width: 300px;
-      height: 35px;
+      width: 100%;
+      height: 32px;
     }
+
     audio::-webkit-media-controls-enclosure {
       width: 100%;
       overflow: hidden;
       background-color: transparent;
     }
+
     .Btn {
       width: 30px;
       height: 30px;
       border: none;
-      border-radius: 50%;
+      border-radius: 10px;
       background-color: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all ease-in-out 0.3s;
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease;
       cursor: pointer;
+
       .svgIcon {
-        color: rgb(16, 16, 16);
+        color: var(--app-text-muted);
       }
     }
+
     .Btn:hover .tooltip {
       opacity: 1;
-      transition-duration: 0.3s;
+      transition-duration: 0.18s;
     }
 
     .Btn:hover {
-      background-color: rgba(161, 117, 233, 0.9);
-      transition-duration: 0.3s;
-      box-shadow: 0 0 10px rgba(161, 117, 233, 0.6);
+      background-color: var(--app-accent-soft);
     }
 
     .Btn:hover .svgIcon {
-      animation: slide-in-top 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    }
-
-    @keyframes slide-in-top {
-      0% {
-        transform: translateY(-10px);
-        opacity: 0;
-      }
-
-      100% {
-        transform: translateY(0px);
-        opacity: 1;
-      }
+      color: var(--app-accent);
     }
   }
 }

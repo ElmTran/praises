@@ -68,21 +68,25 @@ if (!state.value.model) {
   display: flex;
   flex-direction: column;
   flex: 1;
+
   .el-form {
     .el-form-item {
-      margin-bottom: 1rem;
+      margin-bottom: 14px;
     }
 
     .item-label {
-      font-size: 14px;
-      color: rgba(244, 91, 91, 0.8);
+      color: var(--app-text-secondary);
+      font-size: 13px;
+      font-weight: 500;
     }
+
     .form-item {
-      width: 160px;
+      width: 200px;
       margin-left: auto;
     }
+
     :deep(.el-select__wrapper) {
-      padding: 0.2rem 1rem;
+      padding: 0.2rem 0.75rem;
     }
   }
 }

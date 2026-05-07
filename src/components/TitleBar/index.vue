@@ -32,7 +32,8 @@ const maximized = ref(false);
 <style scoped lang="scss">
 .titlebar {
   height: 30px;
-  background: transparent;
+  background: rgba(245, 241, 234, 0.86);
+  border-bottom: 1px solid var(--app-border-soft);
   user-select: none;
   display: flex;
   justify-content: flex-end;
@@ -45,7 +46,7 @@ const maximized = ref(false);
 .titlebar-button {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--app-text-muted);
   font-size: 12px;
   padding: 0 10px;
   cursor: pointer;
@@ -54,6 +55,7 @@ const maximized = ref(false);
   justify-content: center;
 }
 .titlebar-button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--app-text);
+  background: rgba(23, 20, 19, 0.05);
 }
 </style>

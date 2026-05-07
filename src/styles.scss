@@ -1,135 +1,226 @@
 :root {
-  font-family: "Bitter", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-
-  background: linear-gradient(to bottom right, #495c7c, #9a5479);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  width: 100%;
-  height: 100vh;
-
+  font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #171413;
+  background: #f5f1ea;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  padding: 0%;
+
+  --app-bg: #f5f1ea;
+  --app-surface: rgba(255, 255, 255, 0.78);
+  --app-surface-strong: rgba(255, 255, 255, 0.92);
+  --app-text: #171413;
+  --app-text-secondary: rgba(23, 20, 19, 0.72);
+  --app-text-muted: rgba(23, 20, 19, 0.56);
+  --app-border-soft: rgba(18, 18, 18, 0.08);
+  --app-border: rgba(18, 18, 18, 0.14);
+  --app-border-strong: rgba(18, 18, 18, 0.22);
+  --app-accent: #7a1f32;
+  --app-accent-soft: rgba(122, 31, 50, 0.12);
+  --app-radius: 12px;
+  --app-radius-sm: 8px;
+  --app-shadow: 0 14px 40px rgba(23, 20, 19, 0.06);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
+* {
+  box-sizing: border-box;
 }
 
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(
+      circle at top left,
+      rgba(122, 31, 50, 0.08),
+      transparent 28rem
+    ),
+    var(--app-bg);
 }
 
-.row {
-  display: flex;
-  justify-content: center;
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 a {
+  color: var(--app-accent);
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #5c1726;
 }
 
-h1 {
-  text-align: center;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
-  }
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
 }
 
 .el-select {
+  width: 100%;
+
   .el-select__wrapper {
-    appearance: none;
-    border: 0;
-    outline: 0;
-    font: inherit;
-    background: transparent;
-    cursor: pointer;
-    border-radius: 0.4em;
-    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2) !important;
-    .el-select__selected-item {
-      color: rgba(255, 255, 255, 0.95);
-    }
+    min-height: 36px;
+    border-radius: var(--app-radius-sm);
+    background: var(--app-surface-strong);
+    box-shadow: inset 0 0 0 1px var(--app-border-soft) !important;
+    transition:
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
   }
+
+  .el-select__wrapper.is-focused,
+  .el-select__wrapper:hover {
+    box-shadow: inset 0 0 0 1px var(--app-accent) !important;
+  }
+
+  .el-select__selected-item,
   .el-select__input {
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--app-text);
+  }
+
+  .el-select__placeholder {
+    color: var(--app-text-muted);
   }
 }
+
 .el-select__popper {
-  background: rgba(251, 176, 199, 0.3) !important;
-  backdrop-filter: blur(10px);
-  border: none !important;
+  max-width: 240px;
+  border: 1px solid var(--app-border-soft) !important;
+  border-radius: var(--app-radius-sm) !important;
+  background: var(--app-surface-strong) !important;
+  box-shadow: var(--app-shadow) !important;
+
   .el-select-dropdown__item {
-    color: rgb(255, 255, 255);
+    overflow: hidden;
+    color: var(--app-text-secondary);
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     &.is-hovering {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(23, 20, 19, 0.05);
     }
+
     &.is-selected {
-      background: rgba(255, 255, 255, 0.3);
-      color: rgba(97, 66, 127, 0.9);
+      color: var(--app-accent);
+      background: var(--app-accent-soft);
+      font-weight: 600;
     }
   }
+
   .el-popper__arrow::before {
-    background: rgba(251, 176, 199, 0.8) !important;
-    backdrop-filter: blur(10px);
-    border-color: transparent transparent rgba(251, 176, 199, 0.1) transparent !important;
+    background: var(--app-surface-strong) !important;
+    border-color: var(--app-border-soft) !important;
   }
+}
+
+.el-form-item__label {
+  color: var(--app-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.el-slider {
+  --el-slider-main-bg-color: var(--app-accent);
+  --el-slider-runway-bg-color: rgba(18, 18, 18, 0.1);
+  --el-slider-stop-bg-color: var(--app-surface-strong);
+
+  .el-slider__runway {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(18, 18, 18, 0.1);
+  }
+
+  .el-slider__bar {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--app-accent);
+  }
+
+  .el-slider__button-wrapper {
+    top: -16px;
+  }
+
+  .el-slider__button {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--app-accent);
+    background: var(--app-surface-strong);
+    box-shadow: 0 2px 8px rgba(23, 20, 19, 0.08);
+  }
+
+  .el-slider__button:hover,
+  .el-slider__button.dragging {
+    transform: scale(1.08);
+  }
+}
+
+.el-input {
+  .el-input__wrapper {
+    min-height: 36px;
+    border-radius: var(--app-radius-sm);
+    background: var(--app-surface-strong);
+    box-shadow: inset 0 0 0 1px var(--app-border-soft);
+    transition:
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .el-input__wrapper:hover,
+  .el-input__wrapper.is-focus {
+    box-shadow: inset 0 0 0 1px var(--app-accent);
+  }
+
+  .el-input__inner {
+    color: var(--app-text);
+  }
+}
+
+.el-switch {
+  --el-switch-on-color: var(--app-accent);
+  --el-switch-off-color: rgba(18, 18, 18, 0.22);
 }
 
 .setting-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1.2em;
+  display: grid;
+  gap: 14px;
+  width: min(520px, 100%);
+  margin: 16px auto 0;
 
   .setting-box {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--app-border-soft);
+    border-radius: var(--app-radius);
+    background: var(--app-surface);
+
     .setting-item {
       display: flex;
-      margin: 0.6em 0;
+      align-items: center;
+      margin: 0;
+
       .el-col {
         align-content: center;
       }
 
       .item__label {
-        color: rgba(244, 91, 91, 0.8);
+        color: var(--app-text-secondary);
+        font-size: 13px;
+        font-weight: 500;
       }
+
       .item__input {
-        width: 200px;
-      }
-      .el-input__wrapper {
-        background: transparent;
-        border: none;
-        border-radius: 0.4em;
-        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-        .el-input__inner {
-          color: rgba(255, 255, 255, 0.95);
-        }
+        width: 100%;
       }
     }
   }

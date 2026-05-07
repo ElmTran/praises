@@ -70,7 +70,7 @@ useSpeakerOptions(state.value.language);
           v-model="state.language"
           class="form-item"
           :placeholder="$t('tts.azure.placeholder.language')"
-          :popper-append-to-body="false"
+          fit-input-width
           filterable
           @change="useSpeakerOptions(state.language)"
         >
@@ -207,101 +207,104 @@ useSpeakerOptions(state.value.language);
   display: flex;
   flex-direction: column;
   flex: 1;
+
   .el-form {
     .el-form-item {
-      margin-bottom: 1rem;
+      margin-bottom: 14px;
     }
 
     .item-label {
-      font-size: 14px;
-      color: rgba(244, 91, 91, 0.8);
+      color: var(--app-text-secondary);
+      font-size: 13px;
+      font-weight: 500;
     }
+
     .form-item {
-      width: 160px;
+      width: 200px;
       margin-left: auto;
     }
+
     .form-item-slider {
-      width: 150px;
+      width: 198px;
       margin-left: auto;
     }
+
     :deep(.el-select__wrapper) {
-      padding: 0.2rem 1rem;
+      padding: 0.2rem 0.75rem;
     }
   }
+
   .control-bar {
     display: flex;
     flex: 1;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+
     .template-select {
-      width: 140px;
+      width: 166px;
     }
+
     :deep(.el-select__wrapper) {
-      padding: 0.8rem;
+      padding: 0.35rem 0.75rem;
     }
+
     .saveBtn {
-      width: 100px;
-      height: 40px;
-      border-radius: 40px;
-      border: none;
-      box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
-      background-color: transparent;
+      min-width: 92px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--app-border-soft);
+      background-color: var(--app-surface-strong);
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       cursor: pointer;
-      transition-duration: 0.3s;
+      color: var(--app-text-secondary);
+      transition:
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
       overflow: hidden;
     }
 
     .IconContainer {
-      width: 30px;
-      height: 30px;
-      background: linear-gradient(
-        to bottom,
-        rgba(172, 255, 136, 0.8),
-        rgba(70, 255, 73, 0.8)
-      );
-      border-radius: 50px;
+      width: 18px;
+      height: 18px;
+      color: var(--app-accent);
+      background: transparent;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      z-index: 2;
-      transition-duration: 0.3s;
     }
 
     .icon {
       border-radius: 1px;
+      fill: currentColor;
     }
 
     .btnLabel {
       height: 100%;
-      width: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: inherit;
       z-index: 1;
-      transition-duration: 0.3s;
-      font-size: 1.04em;
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0;
     }
 
-    .saveBtn:hover .IconContainer {
-      width: 90px;
-      transition-duration: 0.3s;
-    }
-
-    .saveBtn:hover .btnLabel {
-      transform: translate(10px);
-      width: 0;
-      font-size: 0;
-      transition-duration: 0.3s;
+    .saveBtn:hover {
+      color: var(--app-accent);
+      border-color: var(--app-border-strong);
+      transform: translateY(-1px);
     }
 
     .saveBtn:active {
-      transform: scale(0.95);
-      transition-duration: 0.3s;
+      transform: translateY(0);
     }
   }
 }

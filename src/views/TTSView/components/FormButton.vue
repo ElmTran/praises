@@ -19,47 +19,35 @@ const convert = () => {
 .bottom-container {
   display: flex;
   justify-content: center;
+
   .button {
     position: relative;
     overflow: hidden;
-    height: 2.8rem;
-    width: 7rem;
-    border-radius: 1.5rem;
-    background: #3d3a4e;
-    background-size: 400%;
+    height: 38px;
+    min-width: 108px;
+    border-radius: 12px;
+    background: rgba(122, 31, 50, 0.92);
     color: #fff;
-    border: none;
+    border: 1px solid rgba(122, 31, 50, 0.26);
     cursor: pointer;
+    transition:
+      background-color 0.18s ease,
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
   }
 
-  .button:hover::before {
-    transform: scaleX(1);
+  .button:hover {
+    background: #6a1b2b;
+    box-shadow: 0 6px 16px rgba(122, 31, 50, 0.14);
+    transform: translateY(-1px);
   }
 
   .button-content {
     position: relative;
     z-index: 1;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     font-family: inherit;
-  }
-
-  .button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    width: 100%;
-    height: inherit;
-    border-radius: inherit;
-    background: linear-gradient(
-      to bottom right,
-      rgba(93, 140, 233, 0.377) 10.8%,
-      rgba(218, 88, 238, 0.478) 94.3%
-    );
-    transition: all 0.475s;
   }
 }
 </style>

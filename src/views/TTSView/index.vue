@@ -110,55 +110,101 @@ listen("PlayAudio", ({ payload }) => {
 
 <style scoped lang="scss">
 .main {
-  padding: 5px 20px;
+  flex: 1;
+  min-height: 0;
+  padding: 18px 20px 8px;
+  overflow: hidden;
 }
+
 .main-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 360px);
+  gap: 12px;
   height: 100%;
+  min-height: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  :deep(.el-col) {
+    display: block;
+    flex: initial;
+    max-width: none;
+    min-width: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   .textarea-container {
     height: 100%;
-    padding: 0 10px;
+    min-height: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 
     .textarea-footer {
-      margin-bottom: 10px;
       display: flex;
       justify-content: flex-end;
 
       .ssml-switch {
-        margin-right: 10px;
-        --el-switch-on-color: #ca5e9b;
-        --el-switch-off-color: #414141;
+        margin-right: 0;
       }
     }
+
     textarea {
       border-radius: 8px;
       width: 100%;
-      height: 450px;
+      flex: 1;
+      min-height: 0;
       resize: none;
-      color: #fff;
-      border: 1px solid #414141;
-      background-color: transparent;
+      color: var(--app-text);
+      border: 1px solid var(--app-border-soft);
+      background: var(--app-surface-strong);
       font-family: inherit;
-      padding: 12px 16px;
-      box-sizing: border-box; // make padding included in width
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 16px 18px;
+      transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
     }
+
     textarea:focus {
       outline: none;
-      border: 1px solid rgba(202, 94, 155, 0.7);
-      box-shadow: rgba(245, 73, 145, 0.2) 0px 0px 0px 1px;
+      border-color: var(--app-accent);
+      box-shadow: 0 0 0 3px var(--app-accent-soft);
     }
   }
+
   .form-container {
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-height: 0;
+    padding: 16px;
+    border: 1px solid var(--app-border-soft);
+    border-radius: var(--app-radius);
+    background: rgba(255, 255, 255, 0.44);
+
     :deep(.el-select__wrapper) {
-      padding: 0.8rem 1rem;
+      padding: 0.35rem 0.75rem;
     }
+
     .service-select {
-      margin: 0.6rem 0 1rem;
+      margin: 0 0 18px;
     }
+  }
+}
+
+@media (max-width: 820px) {
+  .main {
+    padding: 14px 14px 8px;
+  }
+
+  .main-container {
+    grid-template-columns: minmax(0, 1fr) minmax(292px, 320px);
+    gap: 10px;
   }
 }
 </style>
